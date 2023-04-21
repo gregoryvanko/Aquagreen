@@ -38,4 +38,4 @@ class AquagreenStart {
 // Creation de l'application
 let MyAquagreenStart = new AquagreenStart()
 // Ajout de l'application
-NanoXAddModule("Start", null, MyAquagreenStart.Initiation.bind(MyAquagreenStart), true, false)
+NanoXAddModule("Start", IconModule.Start(), MyAquagreenStart.Initiation.bind(MyAquagreenStart), true, false)

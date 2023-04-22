@@ -1,4 +1,4 @@
-class AquagreenStart {
+class Start {
     constructor(){
         this._DivApp = NanoXGetDivApp()
     }
@@ -36,6 +36,6 @@ class AquagreenStart {
 }
 
 // Creation de l'application
-let MyAquagreenStart = new AquagreenStart()
+let MyStart = new Start()
 // Ajout de l'application
-NanoXAddModule("Start", IconModule.Start(), MyAquagreenStart.Initiation.bind(MyAquagreenStart), true, false)
+NanoXAddModule("Start", IconModule.Start(), MyStart.Initiation.bind(MyStart), true, false)

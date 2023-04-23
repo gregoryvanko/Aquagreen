@@ -1,0 +1,82 @@
+html{
+    max-width: 100%;
+    overflow-x: hidden;
+}
+body{
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Titre */
+.Titre{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--NanoX-appcolor);
+    word-wrap: break-word;
+}
+
+/* Sous Titre */
+.SousTitre{
+    font-size: 1.5rem;
+    color: var(--NanoX-appcolor);
+    word-wrap: break-word;
+}
+
+/* Texte */
+.Text{
+    font-size: 1.2rem;
+    word-wrap: break-word;
+}
+.TextSmall{
+    font-size: 0.8rem;
+    word-wrap: break-word;
+}
+
+.Input {
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    margin: 1rem;
+    border: solid 1px #dcdcdc;
+    background-color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: black;
+}
+.Input:focus,
+.Input.focus {
+    border-color: var(--NanoX-appcolor);
+}
+@media (hover: hover) {
+    .Input:hover{
+        border-color: var(--NanoX-appcolor);
+    }
+}
+
+/* Button */
+.Button{
+    margin: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: 1px solid var(--NanoX-appcolor);
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    color: rgb(44,1,21);
+    background: white;
+    outline: none;
+}
+@media (hover: hover) {
+    .Button:hover:enabled{
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+    }
+}
+.Button:disabled,
+.Button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

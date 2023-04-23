@@ -1,3 +1,5 @@
+let NanoXAddRoute = require("@gregvanko/nanox").NanoXAddRoute
+
 async function Start({Port = 9000, Name = "Aquagreen",  Debug = false, SplashScreenFilePath = null, MongoDbUrl = "mongodb://localhost:27017"} = {}){
     // Define default SplashScreenFilePath
     if (SplashScreenFilePath == null){SplashScreenFilePath = __dirname + "/Frontend/SplashScreen/SplashScreen.html"}
@@ -34,6 +36,7 @@ async function Start({Port = 9000, Name = "Aquagreen",  Debug = false, SplashScr
     require("@gregvanko/nanox").NanoXInitiation(OptionNanoX)
 
     // Code a jouter pour créer les routes de l’application
+    NanoXAddRoute("/device", require("./Backend/Route/RouteDevice")) 
 
     // Start NanoX
     await require("@gregvanko/nanox").NanoXStart()

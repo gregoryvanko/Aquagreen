@@ -3,7 +3,7 @@ const Mongoose = require("@gregvanko/nanox").Mongoose
 let DeviceSchema = new Mongoose.Schema(
     {
         UserId : String,
-        Name: String,
+        DeviceName: String,
         DeviceId: String
     },
     { collection:'Device'}

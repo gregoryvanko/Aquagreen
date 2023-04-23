@@ -58,7 +58,7 @@ body{
 
 /* Button */
 .Button{
-    margin: 1rem;
+    margin: 0.5rem;
     padding: 0.5rem;
     cursor: pointer;
     border: 1px solid var(--NanoX-appcolor);

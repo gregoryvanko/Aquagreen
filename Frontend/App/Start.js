@@ -1,6 +1,7 @@
 class Start {
     constructor(){
         this._DivApp = NanoXGetDivApp()
+        this._DeviceManagement = new DeviceManagement(this._DivApp, this.DisplayError.bind(this))
     }
 
     Initiation(){
@@ -14,40 +15,13 @@ class Start {
     LoadStartView(){
         // Clear view
         this._DivApp.innerHTML=""
-        this._DivApp.appendChild(NanoXBuild.DivText("Get your device", null, "Text", "margin-top: 1rem;"))
 
         // Build Menu Button
         this.BuildMenuButton()
 
         // Get Device form server
-        Device.GetDevice().then((reponse)=>{
-            this._DivApp.innerHTML=""
-            if (reponse.length == 0){
-                this._DivApp.appendChild(Device.RenderDeviceInfo(this.AddDevice.bind(this)))
-            } else {
-                Device.RenderDevice(reponse)
-            }
-        },(erreur)=>{
-            // Clear view
-            this._DivApp.innerHTML=""
-            this._DivApp.appendChild(this.GetDivError(erreur))
-        })
-    }
+        this._DeviceManagement.GetDevice()
 
-    AddDevice(Parametres){
-        // Clear view
-        this._DivApp.innerHTML=""
-        this._DivApp.appendChild(NanoXBuild.DivText("Saving your device...", null, "Text", "margin-top: 1rem;"))
-
-        // Save device to DB
-        Device.SaveDevice(Parametres).then((reponse)=>{
-            this._DivApp.innerHTML=""
-            this.LoadStartView()
-        },(erreur)=>{
-            // Clear view
-            this._DivApp.innerHTML=""
-            this._DivApp.appendChild(this.GetDivError(erreur))
-        })
     }
 
     // Build all Nanox menu Button
@@ -65,12 +39,13 @@ class Start {
     }
 
     // retunr div with error message
-    GetDivError(MyError){
+    DisplayError(MyError){
+        this._DivApp.innerHTML = ""
         let diverror = document.createElement('div')
         diverror.innerHTML = MyError
         diverror.style.color = "red"
         diverror.style.margin = "2rem"
-        return diverror
+        this._DivApp.appendChild(diverror)
     }
 
 }

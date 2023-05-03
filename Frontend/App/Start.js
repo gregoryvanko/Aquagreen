@@ -1,7 +1,7 @@
 class Start {
     constructor(){
         this._DivApp = NanoXGetDivApp()
-        this._DeviceManagement = new DeviceManagement(this._DivApp, this.DisplayError.bind(this))
+        this._DeviceManagement = new DeviceManagement(this._DivApp, this.DisplayError.bind(this), this.ClickOnDevice.bind(this))
     }
 
     Initiation(){
@@ -21,7 +21,11 @@ class Start {
 
         // Get Device form server
         this._DeviceManagement.GetDevice()
+    }
 
+    ClickOnDevice(Device){
+        // ToDo lunch One device
+        console.log(Device)
     }
 
     // Build all Nanox menu Button

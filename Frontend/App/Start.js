@@ -24,8 +24,7 @@ class Start {
     }
 
     ClickOnDevice(Device){
-        // ToDo lunch One device
-        console.log(Device)
+        let MyDevice = new DeviceWorker(this._DivApp, this.DisplayError.bind(this), Device)
     }
 
     // Build all Nanox menu Button

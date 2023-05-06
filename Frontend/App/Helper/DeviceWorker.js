@@ -17,7 +17,13 @@ class DeviceWorker {
 
         // Topics
         this._TopicStatus = this._Device.DeviceId + '/status'
-        this._TopicConfig = this._Device.DeviceId + '/config'
+        this._TopicDeviceAction = this._Device.DeviceId + '/deviceaction' 
+        this._TopicDeviceResponse = this._Device.DeviceId + '/deviceresponse' 
+
+        // Device Action
+        this._GetConfig = "GetConfig"
+
+        this.DeviceConfig = null
 
         this.MqttConnection()
     }
@@ -28,7 +34,7 @@ class DeviceWorker {
         this._MqttClient.on('connect', () => {
             console.log('Mqtt Connected')
             // Subscribe to topics
-            this._MqttClient.subscribe(me._TopicStatus,(err) => {
+            this._MqttClient.subscribe(me._TopicDeviceResponse,(err) => {
                 if (err) {
                     me._DisplayError(err)
                 } else {
@@ -61,13 +67,36 @@ class DeviceWorker {
         })
 
         this._MqttClient.on('message', (topic, payload) => {
-            // Payload is Buffer
-            console.log(`Topic: ${topic}, Message: ${payload.toString()}`)
+            me.OnMessage(topic, JSON.parse(payload.toString()))
         })
     }
 
     Start(){
         // Publish a message 'get' to the topic 'config'
-        this._MqttClient.publish(this._TopicConfig, 'GetConfig')
+        this._MqttClient.publish(this._TopicDeviceAction, this._GetConfig)
+    }
+
+    OnMessage(Topic, Payload){
+        switch (Topic) {
+            case this._TopicDeviceResponse:
+                // si l'action de cette réponse était :this._GetConfig
+                if (Payload.DeviceAction == this._GetConfig){
+                    // Save Config
+                    this.DeviceConfig = Payload.Response
+                    // Set device start page
+                    this.RenderDeviceStartPage()
+                } else {
+                    this._DisplayError(`Payload.DeviceAction not found for Topic: ${Topic}, Message: ${Payload}`)
+                }
+                break;
+        
+            default:
+                this._DisplayError(`Topic not found: ${Topic}, Message: ${Payload}`)
+                break;
+        }
+    }
+
+    RenderDeviceStartPage(){
+        // ToDo
     }
 }

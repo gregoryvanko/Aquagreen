@@ -117,7 +117,7 @@ class DeviceManagement {
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText("Your devices", null, "Titre", null))
         Devices.forEach(element => {
-            // Conteneur pour la carte du device est le Div Trois points
+            // Conteneur pour la carte du device et le Div du svg Trois points
             let ConteneurDevice = NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice", null)
             // Carte du device
             let DivDevice = NanoXBuild.DivFlexRowStart(null, "DeviceCard", null)

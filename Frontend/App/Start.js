@@ -2,6 +2,7 @@ class Start {
     constructor(){
         this._DivApp = NanoXGetDivApp()
         this._DeviceManagement = new DeviceManagement(this._DivApp, this.DisplayError.bind(this), this.ClickOnDevice.bind(this))
+        this._MyDevice = null
     }
 
     Initiation(){
@@ -15,16 +16,16 @@ class Start {
     LoadStartView(){
         // Clear view
         this._DivApp.innerHTML=""
-
         // Build Menu Button
         this.BuildMenuButton()
-
+        // Clear MyDevice
+        this._MyDevice = null
         // Get Device form server
         this._DeviceManagement.GetDevice()
     }
 
     ClickOnDevice(Device){
-        let MyDevice = new DeviceWorker(this._DivApp, this.DisplayError.bind(this), Device)
+        this._MyDevice = new DeviceWorker(this._DivApp, this.DisplayError.bind(this), Device, this.LoadStartView.bind(this))
     }
 
     // Build all Nanox menu Button

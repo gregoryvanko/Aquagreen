@@ -165,8 +165,9 @@ class DeviceWorker {
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText("Electrovannes", null, "Titre", null))
         // Add all electrovanne
-        // ToDo
-
+        this._DeviceConfig.Electrovannes.forEach(Electrovanne => {
+            Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne.Id), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne.Id)))
+        });
         // add conteneur to divapp
         this._DivApp.appendChild(Conteneur) 
     }
@@ -182,12 +183,69 @@ class DeviceWorker {
         // Conteneur
         let Conteneur = NanoXBuild.DivFlexColumn("Conteneur", null, "width: 100%;")
         // Titre
-        Conteneur.appendChild(NanoXBuild.DivText("Scènes", null, "Titre", null))
+        Conteneur.appendChild(NanoXBuild.DivText("Scenes", null, "Titre", null))
         // Add all scenes
-        // ToDo
-
+        if (this._DeviceConfig.Scenes.length != 0){
+            this._DeviceConfig.Scenes.forEach(Scene => {
+                Conteneur.appendChild(this.RenderButtonAction(Scene.Name, this.ClickOnScene.bind(this, Scene.Id), this.ClickOnTreeDotsScene.bind(this, Scene.Id)))
+            });
+        } else {
+            Conteneur.appendChild(NanoXBuild.DivText("No scene defined", null, "Text", ""))
+        }
+        // Button Add Scene
+        Conteneur.appendChild(NanoXBuild.Button("Add Scene", this.ClickOnAddScene.bind(this), "addscene", "Button Text", "margin-top: 3rem;"))
         // add conteneur to divapp
         this._DivApp.appendChild(Conteneur) 
+    }
+
+    // Boutton pour les Electrovanne et les scenes
+    RenderButtonAction(Name = null, Action = null, TreeDotsAction = null){
+        let Conteneur= NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice", null)
+        let DivDevice = NanoXBuild.DivFlexRowStart(null, "DeviceCard", null)
+        //let DivImage = NanoXBuild.DivFlexColumn(null, null, "height: 100%; width: 20%; margin-right: 0.5rem;")
+        //DivImage.innerHTML = IconModule.Start()
+        //DivDevice.appendChild(DivImage)
+        DivDevice.appendChild(NanoXBuild.DivText(Name, null, "Text", ""))
+        DivDevice.onclick = Action
+        Conteneur.appendChild(DivDevice)
+        // Div Trois points
+        let DivTroisPoints = NanoXBuild.DivFlexRowStart(null, "DeviceTroisPoints", null)
+        let DivImageTroisPoints = NanoXBuild.DivFlexColumn(null, null, "height: 100%; width: 100%;")
+        DivImageTroisPoints.innerHTML = IconModule.ThreeDots()
+        DivTroisPoints.appendChild(DivImageTroisPoints)
+        DivTroisPoints.onclick = TreeDotsAction
+        Conteneur.appendChild(DivTroisPoints)
+        return Conteneur
+    }
+
+    // Click on Electrovanne Action
+    ClickOnElectrovanne(Id){
+        alert("Action: " +Id)
+        // ToDo
+    }
+
+    // Click on Electrovanne TreeDots
+    ClickOnTreeDotsElectrovanne(Id){
+        alert("Treedots: " +Id)
+        // ToDo
+    }
+
+    // Click on Scene Action
+    ClickOnScene(Id){
+        alert("Treedots: " +Id)
+        // ToDo
+    }
+
+    // Click on Scene TreeDots
+    ClickOnTreeDotsScene(Id){
+        alert("Treedots: " +Id)
+        // ToDo
+    }
+
+    // Click on Add Scene
+    ClickOnAddScene(){
+        alert("Add Scene")
+        // ToDo
     }
 
     // Clear MenuButton

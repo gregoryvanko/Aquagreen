@@ -1,7 +1,9 @@
-.ConteneurDevice{
-    width: 90%;
-    height: 5rem;
+.Largeur {
     max-width: 400px;
+    width: 90%;
+}
+.ConteneurDevice{
+    height: 5rem;
     margin: 1rem;
     padding: 0.5rem;
     border: 1px solid var(--NanoX-appcolor);

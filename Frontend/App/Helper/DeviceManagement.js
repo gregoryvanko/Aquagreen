@@ -36,18 +36,18 @@ class DeviceManagement {
             Conteneur.appendChild(NanoXBuild.DivText("Add your device", null, "Titre", null))
         }
         // Device Name
-        let DeviceName = NanoXBuild.Input(MyDeviceName, "text", "DeviceName", "Device Name", "DeviceName", "Input Text", "max-width: 400px; width: 90%;")
+        let DeviceName = NanoXBuild.Input(MyDeviceName, "text", "DeviceName", "Device Name", "DeviceName", "Input Text Largeur", "")
         DeviceName.autocomplete = "off"
         Conteneur.appendChild(DeviceName)
         // Device ID
-        let DeviceId = NanoXBuild.Input(MyDeviceId, "text", "DeviceId", "Device Id", "DeviceId", "Input Text", "max-width: 400px; width: 90%;")
+        let DeviceId = NanoXBuild.Input(MyDeviceId, "text", "DeviceId", "Device Id", "DeviceId", "Input Text Largeur", "")
         DeviceId.autocomplete = "off"
         Conteneur.appendChild(DeviceId)
         // Text error
         let TextError = NanoXBuild.DivText("", null, "Text", "color: red;")
         Conteneur.appendChild(TextError)
         // Add device button
-        let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, null, "max-width: 400px; width: 90%;")
+        let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
         if (Update){
             Conteneur.appendChild(NanoXBuild.Button("Delete Device", this.ClickDeleteDevice.bind(this, DeviceName.value, MyId), "deleteDevice", "Button Text", "color: red; border-color: red;"))
             DivButton.appendChild(NanoXBuild.Button("Update Device", this.ClickUpdateDevice.bind(this, DeviceName, DeviceId, TextError, MyId), "AddDevice", "Button Text", "width: 44%;"))
@@ -118,7 +118,7 @@ class DeviceManagement {
         Conteneur.appendChild(NanoXBuild.DivText("Your devices", null, "Titre", null))
         Devices.forEach(element => {
             // Conteneur pour la carte du device et le Div du svg Trois points
-            let ConteneurDevice = NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice", null)
+            let ConteneurDevice = NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice Largeur", null)
             // Carte du device
             let DivDevice = NanoXBuild.DivFlexRowStart(null, "DeviceCard", null)
             let DivImage = NanoXBuild.DivFlexColumn(null, null, "height: 100%; width: 20%; margin-right: 0.5rem;")

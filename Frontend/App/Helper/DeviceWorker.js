@@ -22,12 +22,19 @@ class DeviceWorker {
         this._TopicConfigReq = this._Device.DeviceId + '/config/req' 
         // Topic pour recevoir la configuration du device
         this._TopicConfigRes = this._Device.DeviceId + '/config/res' 
+        // Topic pour demander un update de la config
+        this._TopicConfigUpdateReq = this._Device.DeviceId + '/config/update/req' 
+        // Topic pour revecoir la reponse d'un update de la config
+        this._TopicConfigUpdateRes = this._Device.DeviceId + '/config/update/res' 
+
+        // Constante
+        this._ConstSaveElectrovanne = "SaveElectrovanne"
 
         // Configuration du device
         this._DeviceConfig = null
 
-        // Timer Get config
-        this._TimerGetConfig = null
+        // Config pour les electrovanne
+        this._ElectrovanneConfig = new ElectrovanneConfig(this._DivApp, this.UpdateElectrovannesConfig.bind(this), this.RenderDeviceElectrovannePage.bind(this))
 
         // Connection à MQTT et souscription aux topics
         this.MqttConnection()
@@ -40,7 +47,7 @@ class DeviceWorker {
         this._MqttClient.on('connect', () => {
             console.log('Mqtt Connected')
             // Subscribe to topics
-            this._MqttClient.subscribe(me._TopicConfigRes,(err) => {
+            this._MqttClient.subscribe( [me._TopicConfigRes, me._TopicConfigUpdateRes ],(err) => {
                 if (err) {
                     me._DisplayError(err)
                 } else {
@@ -72,45 +79,50 @@ class DeviceWorker {
             me._DisplayError(error)
         })
 
-        this._MqttClient.on('message', (topic, payload) => {
+        this._MqttClient.on('message', (topic, payload, packet) => {
             me.OnMessage(topic, JSON.parse(payload.toString()))
         })
     }
 
     // Start de l'application
     Start(){
+        let me = this
         // Clear Menu Button
         this.ClearMenuButton()
         // Add Back button in settings menu
         NanoXAddMenuButtonSettings("Back", "Back", IconModule.Back(), this.BackToStartPage.bind(this))
+        // Clear view
+        this._DivApp.innerHTML = ""
+        // Add texte
+        this._DivApp.appendChild(NanoXBuild.DivText("Get configuration from device", null, "Texte", "margin: 1rem;"))
         // Publish a message on the topic 'TopicConfigReq'
-        this._MqttClient.publish(this._TopicConfigReq, "true")
-        // Set timer
-        let me = this
-        this._TimerGetConfig = setTimeout(() => {
-            // If Timeout => display retry message
-            me._DisplayError("Retry Get Config...")
-            // retry spublish on topic 'TopicConfigReq'
-            me._MqttClient.publish(me._TopicConfigReq, "true")
-            // Set last timer
-            me._TimerGetConfig = setTimeout(() =>{
-                // Display error message
-                me._DisplayError("Timeout Get Config")
-            }, 2000)
-        }, 2000)
+        this._MqttClient.publish(this._TopicConfigReq, "true", { qos: 0, retain: true }, (error) => {
+            if (error) {
+                me._DisplayError(error)
+            }
+        })
     }
 
     // Reception des message sur les topics souscrits
     OnMessage(Topic, Payload){
         switch (Topic) {
             case this._TopicConfigRes:
-                // Clear Timeout
-                clearTimeout(this._TimerGetConfig)
-                this._TimerGetConfig = null
                 // Save Config
                 this._DeviceConfig = Payload
                 // Set device start page
                 this.RenderDeviceStartPage()
+                // Delete persistant msg
+                this._MqttClient.publish(this._TopicConfigReq, "", { qos: 0, retain: true })
+                break;
+            
+            case this._TopicConfigUpdateRes:
+                if (Payload.Reponse == this._ConstSaveElectrovanne){
+                    this.RenderDeviceElectrovannePage()
+                } else {
+                    this._DisplayError("Error return by device when saving the new config: " + Payload.Reponse)
+                }
+                // Delete persistant msg
+                this._MqttClient.publish(this._TopicConfigUpdateReq, "", { qos: 0, retain: true })
                 break;
         
             default:
@@ -132,12 +144,12 @@ class DeviceWorker {
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText(this._Device.DeviceName, null, "Titre", null))
         // Boutton Electrovannes
-        let ConteneurElectrovanne = NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice", null)
+        let ConteneurElectrovanne = NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice Largeur", null)
         ConteneurElectrovanne.appendChild(NanoXBuild.DivText("Electrovannes", null, "Text", ""))
         ConteneurElectrovanne.onclick = this.RenderDeviceElectrovannePage.bind(this)
         Conteneur.appendChild(ConteneurElectrovanne)
         // Boutton Scenes
-        let ConteneurSecene= NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice", null)
+        let ConteneurSecene= NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice Largeur", null)
         ConteneurSecene.appendChild(NanoXBuild.DivText("Scenes", null, "Text", ""))
         ConteneurSecene.onclick = this.RenderDeviceScenePage.bind(this)
         Conteneur.appendChild(ConteneurSecene)
@@ -166,7 +178,7 @@ class DeviceWorker {
         Conteneur.appendChild(NanoXBuild.DivText("Electrovannes", null, "Titre", null))
         // Add all electrovanne
         this._DeviceConfig.Electrovannes.forEach(Electrovanne => {
-            Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne.Id), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne.Id)))
+            Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne.Id), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne)))
         });
         // add conteneur to divapp
         this._DivApp.appendChild(Conteneur) 
@@ -200,7 +212,7 @@ class DeviceWorker {
 
     // Boutton pour les Electrovanne et les scenes
     RenderButtonAction(Name = null, Action = null, TreeDotsAction = null){
-        let Conteneur= NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice", null)
+        let Conteneur= NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice Largeur", null)
         let DivDevice = NanoXBuild.DivFlexRowStart(null, "DeviceCard", null)
         //let DivImage = NanoXBuild.DivFlexColumn(null, null, "height: 100%; width: 20%; margin-right: 0.5rem;")
         //DivImage.innerHTML = IconModule.Start()
@@ -225,9 +237,25 @@ class DeviceWorker {
     }
 
     // Click on Electrovanne TreeDots
-    ClickOnTreeDotsElectrovanne(Id){
-        alert("Treedots: " +Id)
-        // ToDo
+    ClickOnTreeDotsElectrovanne(Electrovanne){
+        // Load Electrovanne Config
+        this._ElectrovanneConfig.Render(Electrovanne)
+    }
+
+    // Update the config with the new Electrovanne
+    UpdateElectrovannesConfig(){
+        // L'éléctrovanne a ete passée en ref, this._DeviceConfig a donc été updaté automatiquement
+        // Clear view
+        this._DivApp.innerHTML = ""
+        // Add texte
+        this._DivApp.appendChild(NanoXBuild.DivText("Save config to device", null, "Texte", "margin: 1rem;"))
+        // Publish a message on the topic 'TopicConfigUpdateReq'
+        let Updatemsg = {"Action" : this._ConstSaveElectrovanne, "Config": this._DeviceConfig}
+        this._MqttClient.publish(this._TopicConfigUpdateReq, JSON.stringify(Updatemsg), { qos: 0, retain: true } , (error) => {
+            if (error) {
+                me._DisplayError(error)
+            }
+        })
     }
 
     // Click on Scene Action

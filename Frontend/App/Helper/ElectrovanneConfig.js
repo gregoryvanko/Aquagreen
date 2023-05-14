@@ -1,13 +1,12 @@
 class ElectrovanneConfig {
-    constructor(Div, UpdateElectrovannesConfig, RenderDeviceElectrovannePage){
-        this._DivApp = Div
+    constructor(UpdateElectrovannesConfig, RenderDeviceElectrovannePage){
         this._UpdateElectrovannesConfig = UpdateElectrovannesConfig
         this._RenderDeviceElectrovannePage = RenderDeviceElectrovannePage
     }
 
-    Render(Electrovanne){
+    Render(DivApp, Electrovanne){
         // Clear view
-        this._DivApp.innerHTML = ""
+        DivApp.innerHTML = ""
         // Conteneur
         let Conteneur = NanoXBuild.DivFlexColumn("Conteneur", null, "width: 100%;")
         // Titre
@@ -19,11 +18,11 @@ class ElectrovanneConfig {
         Conteneur.appendChild(TextError)
         // Add button controle
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
-        DivButton.appendChild(NanoXBuild.Button("Update", this.ClickUpdate.bind(this, Electrovanne, TextError), "Update", "Button Text", "width: 44%;"))
-        DivButton.appendChild(NanoXBuild.Button("Cancel", this._RenderDeviceElectrovannePage, "Cancel", "Button Text", "width: 44%;"))
+        DivButton.appendChild(NanoXBuild.Button("Update", this.ClickUpdate.bind(this, Electrovanne, TextError), "Update", "Button Text WidthButton1", null))
+        DivButton.appendChild(NanoXBuild.Button("Cancel", this._RenderDeviceElectrovannePage, "Cancel", "Button Text WidthButton1", null))
         Conteneur.appendChild(DivButton)
         // add conteneur to divapp
-        this._DivApp.appendChild(Conteneur) 
+        DivApp.appendChild(Conteneur) 
     }
 
     ClickUpdate(Electrovanne, TextError){

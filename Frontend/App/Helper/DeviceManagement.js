@@ -50,11 +50,11 @@ class DeviceManagement {
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
         if (Update){
             Conteneur.appendChild(NanoXBuild.Button("Delete Device", this.ClickDeleteDevice.bind(this, DeviceName.value, MyId), "deleteDevice", "Button Text", "color: red; border-color: red;"))
-            DivButton.appendChild(NanoXBuild.Button("Update Device", this.ClickUpdateDevice.bind(this, DeviceName, DeviceId, TextError, MyId), "AddDevice", "Button Text", "width: 44%;"))
-            DivButton.appendChild(NanoXBuild.Button("Cancel", this.GetDevice.bind(this), "Cancel", "Button Text", "width: 44%;"))
+            DivButton.appendChild(NanoXBuild.Button("Update Device", this.ClickUpdateDevice.bind(this, DeviceName, DeviceId, TextError, MyId), "AddDevice", "Button Text WidthButton1", null))
+            DivButton.appendChild(NanoXBuild.Button("Cancel", this.GetDevice.bind(this), "Cancel", "Button Text WidthButton1", null))
         } else {
-            DivButton.appendChild(NanoXBuild.Button("Add Device", this.ClickAddDevice.bind(this, DeviceName, DeviceId, TextError), "AddDevice", "Button Text", "width: 44%;"))
-            DivButton.appendChild(NanoXBuild.Button("Cancel", this.GetDevice.bind(this), "Cancel", "Button Text", "width: 44%;"))
+            DivButton.appendChild(NanoXBuild.Button("Add Device", this.ClickAddDevice.bind(this, DeviceName, DeviceId, TextError), "AddDevice", "Button Text WidthButton1", null))
+            DivButton.appendChild(NanoXBuild.Button("Cancel", this.GetDevice.bind(this), "Cancel", "Button Text WidthButton1", null))
         }
         Conteneur.appendChild(DivButton)
         // add conteneur to divapp

@@ -12,7 +12,7 @@ body{
     margin-top: 1rem;
     margin-bottom: 2rem;
     font-size: 2rem;
-    color: var(--NanoX-appcolor);
+    color: black;
     word-wrap: break-word;
 }
 

@@ -59,3 +59,7 @@
 .WidthButton1{
     width: 44%;
 }
+
+.InputWithLabelBox{
+    margin-bottom: 1rem;
+}

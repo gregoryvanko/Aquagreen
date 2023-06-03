@@ -29,6 +29,10 @@ class DeviceWorker {
         this._TopicConfigUpdateRes = this._Device.DeviceId + '/config/update/res' 
         // Topic pour recevoir le statu de la connexion du device
         this._TopicConnectionStatus = this._Device.DeviceId + '/connection/status'
+        // Topic pour demander de demarrer une action
+        this._TopicActionReq = this._Device.DeviceId + '/action/req'
+        // Topic pour recevoir la reponse d'une action
+        this._TopicActionRes = this._Device.DeviceId + '/action/res'
 
         // Constante
         this._ConstSaveElectrovanne = "SaveElectrovanne"
@@ -42,7 +46,7 @@ class DeviceWorker {
         this._DeviceMqttQueue = []
 
         // Config pour les electrovanne
-        this._ElectrovanneConfig = new ElectrovanneConfig(this.UpdateElectrovannesConfig.bind(this), this.RenderDeviceElectrovannePage.bind(this))
+        this._Electrovanne = new Electrovanne(this.UpdateElectrovannesConfig.bind(this), this.ElectrovannesPlay.bind(this), this.RenderDeviceElectrovannePage.bind(this))
 
         // Connection à MQTT et souscription aux topics
         this.MqttConnection()
@@ -55,7 +59,7 @@ class DeviceWorker {
         this._MqttClient.on('connect', () => {
             console.log('Mqtt Connected')
             // Subscribe to topics
-            this._MqttClient.subscribe( [me._TopicConfigRes, me._TopicConfigUpdateRes, me._TopicConnectionStatus],(err) => {
+            this._MqttClient.subscribe( [me._TopicConfigRes, me._TopicConfigUpdateRes, me._TopicConnectionStatus, me._TopicActionRes],(err) => {
                 if (err) {
                     me._DisplayError(err)
                 } else {
@@ -88,7 +92,11 @@ class DeviceWorker {
         })
 
         this._MqttClient.on('message', (topic, payload, packet) => {
-            me.OnMessage(topic, JSON.parse(payload.toString()))
+            if (payload.length == 0){
+                me.OnMessage(topic, "")
+            } else {
+                me.OnMessage(topic, JSON.parse(payload.toString()))
+            }
         })
     }
 
@@ -167,6 +175,13 @@ class DeviceWorker {
                     }
                 }
                 break;
+            
+            case this._TopicActionRes:
+                if (Payload != ""){
+                    console.log(Payload)
+                    // ToDo
+                }
+                break;
         
             default:
                 this._DisplayError(`Topic not found: ${Topic}, Message: ${Payload}`)
@@ -236,7 +251,7 @@ class DeviceWorker {
         Conteneur.appendChild(NanoXBuild.DivText("Electrovannes", null, "Titre", null))
         // Add all electrovanne
         this._DeviceConfig.Electrovannes.forEach(Electrovanne => {
-            Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne.Id), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne)))
+            Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne)))
         });
         // Button back
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
@@ -298,15 +313,26 @@ class DeviceWorker {
     }
 
     // Click on Electrovanne Action
-    ClickOnElectrovanne(Id){
-        alert("Action: " +Id)
-        // ToDo
+    ClickOnElectrovanne(Electrovanne){
+        this._Electrovanne.RenderPlay(this._DeviceConteneur, Electrovanne)
+    }
+
+    // Play Electrovanne
+    ElectrovannesPlay(Id, Name, Duree){
+        // Clear view
+        this._DeviceConteneur.innerHTML = ""
+        // Add texte
+        this._DeviceConteneur.appendChild(NanoXBuild.DivText(`Start electrovanne: ${Name} for ${Duree} min.`, null, "Texte", "margin: 1rem;"))
+        // Publish a message on the topic 'TopicConfigUpdateReq'
+        let Actionemsg = {"Action":"Play", "Option":[{"Vanne":Id,"Duree":Duree}]}
+        // Send message
+        this.SendMqttMessage(this._TopicActionReq, JSON.stringify(Actionemsg))
     }
 
     // Click on Electrovanne TreeDots
     ClickOnTreeDotsElectrovanne(Electrovanne){
         // Load Electrovanne Config
-        this._ElectrovanneConfig.Render(this._DeviceConteneur, Electrovanne)
+        this._Electrovanne.RenderConfig(this._DeviceConteneur, Electrovanne)
     }
 
     // Update the config with the new Electrovanne

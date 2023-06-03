@@ -1,0 +1,1320 @@
+[
+    {
+        "id": "8aeba75683065aac",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cbe83244bcd55dad",
+        "type": "group",
+        "z": "8aeba75683065aac",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "546fdc5995e96e02",
+            "069f14ffa4a49596",
+            "d3011e9169d70dd4",
+            "5205a660d5dc0e7d",
+            "5d6f5b30b708f049",
+            "452e97dc3342a945"
+        ],
+        "x": 114,
+        "y": 239,
+        "w": 522,
+        "h": 202
+    },
+    {
+        "id": "bf76b4d9e21b5caf",
+        "type": "group",
+        "z": "8aeba75683065aac",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "f7c16649e310476c",
+            "99a0eff9d58de191",
+            "a855f882e62ea9c1",
+            "080d8654e4169170",
+            "098b5a26e679ba9f",
+            "af60e0f0121f248d",
+            "0fb5c9b1d0bf58a0",
+            "9b75df9b21e7c1ea",
+            "011c7658d0da5390",
+            "efb82cd274f46812",
+            "102e6565038457f8",
+            "01de604c06d44bf8",
+            "8e1343eeaf624133",
+            "dfbc974aadcc654e",
+            "8bb87eb2d41cf7a1",
+            "8c27e8026ec32a69",
+            "f1f6d1573f470c48",
+            "0636dbd2f2aace3e",
+            "875950f1ab7ab823",
+            "526991e9934d786a",
+            "bbca7d9a73dbfe6a",
+            "8356244ea5f21ab9",
+            "e2b0a0064bb84da1",
+            "6abad2caab52f3da",
+            "2939ba0b5b7287f5",
+            "3289607196db8654",
+            "7dc0b18e43419c01",
+            "17c91db4fa356374",
+            "a1d6ddb0f6d7226d",
+            "41235902c176b166",
+            "bcd04547fecc33bb",
+            "fb4acce5639e8105",
+            "f82817a93cb2b258",
+            "8d655773a681386c",
+            "28df16ca5e7ec4ca",
+            "37b89b451edfa16f"
+        ],
+        "x": 114,
+        "y": 459,
+        "w": 1112,
+        "h": 582
+    },
+    {
+        "id": "1fbaebb2370185b6",
+        "type": "group",
+        "z": "8aeba75683065aac",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "19edc25a4e3eee08",
+            "6f86aa0aa7cb8ec1",
+            "98e14064f9165aa2",
+            "0542f7ca8a8833c8",
+            "23ef9eb1de6c2597",
+            "77b7af0d99ed0dd2",
+            "53106cb98a75ef39"
+        ],
+        "x": 694,
+        "y": 239,
+        "w": 512,
+        "h": 202
+    },
+    {
+        "id": "be9df26fafb7f1b8",
+        "type": "group",
+        "z": "8aeba75683065aac",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "5a2f4dec8fae199d",
+            "bdde68f5d7c02d47",
+            "e81856e124317df6",
+            "1a8e505909d0003e"
+        ],
+        "x": 114,
+        "y": 39,
+        "w": 392,
+        "h": 162
+    },
+    {
+        "id": "9c7bee9962d8b0d2",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "c6bc15b81111a19d",
+        "type": "mqtt-broker",
+        "name": "Mosquitto.vanko.be",
+        "broker": "wss://mosquitto.vanko.be:443",
+        "port": "1883",
+        "tls": "9c7bee9962d8b0d2",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "90",
+        "cleansession": true,
+        "birthTopic": "1234/connection/status",
+        "birthQos": "0",
+        "birthRetain": "true",
+        "birthPayload": "{\"connection\" : \"on\"}",
+        "birthMsg": {},
+        "closeTopic": "1234/connection/status",
+        "closeQos": "0",
+        "closeRetain": "true",
+        "closePayload": "{\"connection\" : \"off\"}",
+        "closeMsg": {},
+        "willTopic": "1234/connection/status",
+        "willQos": "0",
+        "willRetain": "true",
+        "willPayload": "{\"connection\" : \"off\"}",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "546fdc5995e96e02",
+        "type": "mqtt in",
+        "z": "8aeba75683065aac",
+        "g": "cbe83244bcd55dad",
+        "name": "config/req",
+        "topic": "1234/config/req",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "c6bc15b81111a19d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 320,
+        "wires": [
+            [
+                "069f14ffa4a49596"
+            ]
+        ]
+    },
+    {
+        "id": "069f14ffa4a49596",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "cbe83244bcd55dad",
+        "name": "Send Config",
+        "func": "let MyTopic = \"1234/config/res\"\n\nif (msg.payload == true){\n    // Get Config\n    let PayloadToSend = GetConfiguration()\n    return { payload: PayloadToSend, topic: MyTopic }\n}\n\n\nfunction GetConfiguration (){\n    let Config = global.get(\"Config\") || { \n        \"Electrovannes\": [\n            { \"Id\": 1, \"Name\": \"Electro 1\", \"DefautDuree\": 5 },\n            { \"Id\": 2, \"Name\": \"Electro 2\", \"DefautDuree\": 5 },\n            { \"Id\": 3, \"Name\": \"Electro 3\", \"DefautDuree\": 5 },\n            { \"Id\": 4, \"Name\": \"Electro 4\", \"DefautDuree\": 5 },\n            { \"Id\": 5, \"Name\": \"Electro 5\", \"DefautDuree\": 5 },\n            { \"Id\": 6, \"Name\": \"Electro 6\", \"DefautDuree\": 5 },\n            { \"Id\": 7, \"Name\": \"Electro 7\", \"DefautDuree\": 5 },\n            { \"Id\": 8, \"Name\": \"Electro 8\", \"DefautDuree\": 5 }\n        ],\n        \"Scenes\": [] } \n    return Config\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "452e97dc3342a945"
+            ]
+        ]
+    },
+    {
+        "id": "d3011e9169d70dd4",
+        "type": "mqtt in",
+        "z": "8aeba75683065aac",
+        "g": "cbe83244bcd55dad",
+        "name": "config/update/req",
+        "topic": "1234/config/update/req",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "c6bc15b81111a19d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "5205a660d5dc0e7d"
+            ]
+        ]
+    },
+    {
+        "id": "5205a660d5dc0e7d",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "cbe83244bcd55dad",
+        "name": "Update Config",
+        "func": "let MyTopic = \"1234/config/update/res\"\n\nif (msg.payload.Config) {\n    global.set('Config', msg.payload.Config)\n    return { payload: msg.payload.Config, topic: MyTopic}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 400,
+        "wires": [
+            [
+                "452e97dc3342a945"
+            ]
+        ]
+    },
+    {
+        "id": "5d6f5b30b708f049",
+        "type": "comment",
+        "z": "8aeba75683065aac",
+        "g": "cbe83244bcd55dad",
+        "name": "Configuration",
+        "info": "",
+        "x": 210,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f7c16649e310476c",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Play",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"Action\":\"Play\",\"Option\":[{\"Vanne\":1,\"Duree\":4},{\"Vanne\":3,\"Duree\":3}]}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 680,
+        "wires": [
+            [
+                "efb82cd274f46812"
+            ]
+        ]
+    },
+    {
+        "id": "99a0eff9d58de191",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Build sequence",
+        "func": "let Sequence = []\nlet DureeInitTotal = 0\nlet DureeClose = 2\nlet NbVannesInit = 0\n\nlet Action = global.get(\"Action\") || null\n\nif (Action != null){\n    if (Action == \"Play\"){\n        // creation de la sequence open et close pour chaque vanne\n        msg.payload.forEach(function (OptAction) {\n            Sequence.push({\n                \"Vanne\": OptAction.Vanne, \n                \"Action\": \"Open\", \n                \"Duree\": OptAction.Duree, \n                \"DureeInit\": OptAction.Duree\n            })\n            DureeInitTotal += parseInt(OptAction.Duree)\n            Sequence.push({ \n                \"Vanne\": OptAction.Vanne,\n                \"Action\": \"Close\",\n                \"Duree\": DureeClose,\n                \"DureeInit\": DureeClose\n            })\n            DureeInitTotal += DureeClose\n            NbVannesInit += 1\n        });\n        // Save Sequence\n        global.set(\"Task\", {\n            \"DureeInitTotal\": DureeInitTotal,\n            \"NbVannesInit\": NbVannesInit,\n            \"NbVannesDone\": 0,\n            \"Sequence\": Sequence,\n            \"CurrentAction\" : \"Play\"\n        })\n    }\n    return { payload: true };\n} else {node.warn(\"global variable Action  == null\")}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 620,
+        "wires": [
+            [
+                "a855f882e62ea9c1"
+            ]
+        ]
+    },
+    {
+        "id": "a855f882e62ea9c1",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Set Action",
+        "func": "let MyTopic = \"1234/action/res\"\nlet Task = global.get(\"Task\") || null\nlet Action = global.get(\"Action\") || null\nlet IsDebug = global.get(\"Debug\")\n\nif(Action == \"Stop\"){\n    if (IsDebug) {node.warn(\"Stop\")}\n    global.set(\"Action\", null)\n    global.set(\"Task\", null)\n    // Fermer la vanne courante\n    node.send([\n        null,\n        null,\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": \"Close\" } }\n    ])\n    // envoyer le msg de stop au clients\n    Task.Sequence = []\n    Task.NbVannesDone = Task.NbVannesInit\n    Task.CurrentAction = \"Stop\"\n    node.send([\n        null,\n        { payload: Task, topic: MyTopic, retain: true },\n        null\n    ])\n    // reinitialiser le broker mqtt en effacant le dernier msg\n    node.send([\n        null,\n        { payload: \"\", topic: MyTopic, retain: true },\n        null\n    ])\n\n} else if (Action == \"Pause\") {\n    if (IsDebug) {node.warn(\"Pause\")}\n    Task.CurrentAction = \"Pause\"\n    return [\n        null,\n        { payload: Task, topic: MyTopic, retain: true },\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": \"Close\" } }\n    ]\n} else if (Action == \"Restart\"){\n    // On ouvre la vanne préalablement fermée\n    if (IsDebug){node.warn(\"Restart\")}\n    global.set('Action', \"Play\")\n    return [\n        { payload: true },\n        null,\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": Task.Sequence[0].Action } }\n    ]\n} else {\n    if (Task != null) {\n        if (Task.Sequence.length != 0) {\n            Task.CurrentAction = \"Play\"\n            // On prend la première sequence\n            let OneSequence = Task.Sequence[0]\n            // si la duree de la premiere sequence est > 0\n            if (OneSequence.Duree >= 0) {\n                // si on est execute pour la première fois la sequences\n                if (OneSequence.Duree == OneSequence.DureeInit) {\n                    // Si on ouvre une vanne, on incremente le compteur NbVannesDone\n                    if (OneSequence.Action == \"Open\") {\n                        Task.NbVannesDone += 1\n                        // Save Task in global\n                        global.set(\"Task\", Task)\n                    }\n                    // on envoie le message de statu et on execute l'action\n                    return [\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        { payload: { \"Vanne\": OneSequence.Vanne, \"Action\": OneSequence.Action } }\n                    ]\n                } else {\n                    // on envoie uniquement le message de statu\n                    return [\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        null\n                    ]\n                }\n            } else {\n                // On supprime la sequence finalisée\n                let shift = Task.Sequence.shift()\n                // Save Task in global\n                global.set(\"Task\", Task)\n                // si il y a encore des sequences a faire\n                if (Task.Sequence.length != 0) {\n                    let OneSequence = Task.Sequence[0]\n                    if (OneSequence.Duree >= 0) {\n                        if (OneSequence.Duree == OneSequence.DureeInit) {\n                            if (OneSequence.Action == \"Open\") {\n                                Task.NbVannesDone += 1\n                                // Save Task in global\n                                global.set(\"Task\", Task)\n                            }\n                            return [\n                                { payload: true },\n                                { payload: Task, topic: MyTopic, retain: true },\n                                { payload: { \"Vanne\": OneSequence.Vanne, \"Action\": OneSequence.Action } }\n                            ]\n                        } else {\n                            return [\n                                { payload: true },\n                                { payload: Task, topic: MyTopic, retain: true },\n                                null\n                            ]\n                        }\n                    }\n                } else {\n                    Task.CurrentAction = \"End\"\n                    node.send([\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        null\n                    ])\n                    node.send([\n                        null,\n                        { payload: \"\", topic: MyTopic, retain: true },\n                        null\n                    ])\n                }\n            }\n        } else {\n            // On met les variable globale à null\n            global.set(\"Action\", null)\n            global.set(\"Task\", null)\n            return [\n                null,\n                null,\n                null\n            ]\n        }\n    } else {\n        global.set(\"Action\", null)\n        if (IsDebug){node.warn(\"variable global Task is null\")}\n    }\n}\n\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 620,
+        "wires": [
+            [
+                "080d8654e4169170"
+            ],
+            [
+                "9b75df9b21e7c1ea"
+            ],
+            [
+                "af60e0f0121f248d"
+            ]
+        ]
+    },
+    {
+        "id": "080d8654e4169170",
+        "type": "delay",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Delay 1s",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 520,
+        "wires": [
+            [
+                "098b5a26e679ba9f"
+            ]
+        ]
+    },
+    {
+        "id": "098b5a26e679ba9f",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Durée -1",
+        "func": "let Task = global.get(\"Task\") || null\n\nif (Task != null){\n    if (Task.Sequence.length != 0) {\n        // on supprime une unite à la duree de la sequence en cours\n        let OneSequence = Task.Sequence[0]\n        Task.Sequence[0].Duree = OneSequence.Duree - 1\n        global.set(\"Task\", Task)\n    }\n    return { payload: true }\n} else {\n    global.set(\"Action\", null)\n    if (global.get(\"Debug\")) {node.warn(\"Global variable Task is null\");}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 520,
+        "wires": [
+            [
+                "a855f882e62ea9c1"
+            ]
+        ]
+    },
+    {
+        "id": "af60e0f0121f248d",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Set Relay",
+        "func": "const NumberOfRelay = 8\nlet Output = []\nlet IsDebug = global.get(\"Debug\")\n\nfor (let i = 1; i <= NumberOfRelay; i++){\n    if(msg.payload.Vanne == i){\n        if (msg.payload.Action == \"Open\"){\n            Output.push({ payload: 0 })\n        } else {\n            Output.push({ payload: 1 })\n        }\n    } else {\n        Output.push(null)\n    }\n}\nif (IsDebug){\n    node.warn(Output)\n} else {\n    return Output\n}",
+        "outputs": 8,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 860,
+        "wires": [
+            [
+                "8e1343eeaf624133"
+            ],
+            [
+                "875950f1ab7ab823"
+            ],
+            [
+                "8356244ea5f21ab9"
+            ],
+            [
+                "8c27e8026ec32a69"
+            ],
+            [
+                "2939ba0b5b7287f5"
+            ],
+            [
+                "17c91db4fa356374"
+            ],
+            [
+                "bcd04547fecc33bb"
+            ],
+            [
+                "8d655773a681386c"
+            ]
+        ]
+    },
+    {
+        "id": "0fb5c9b1d0bf58a0",
+        "type": "comment",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "State Machine",
+        "info": "",
+        "x": 210,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "19edc25a4e3eee08",
+        "type": "mqtt out",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Send MQTT",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c6bc15b81111a19d",
+        "x": 1010,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "452e97dc3342a945",
+        "type": "link out",
+        "z": "8aeba75683065aac",
+        "g": "cbe83244bcd55dad",
+        "name": "Send MQTT",
+        "mode": "link",
+        "links": [
+            "6f86aa0aa7cb8ec1"
+        ],
+        "x": 595,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "6f86aa0aa7cb8ec1",
+        "type": "link in",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Send MQTT Out",
+        "links": [
+            "452e97dc3342a945",
+            "53106cb98a75ef39",
+            "9b75df9b21e7c1ea"
+        ],
+        "x": 745,
+        "y": 340,
+        "wires": [
+            [
+                "77b7af0d99ed0dd2"
+            ]
+        ]
+    },
+    {
+        "id": "98e14064f9165aa2",
+        "type": "comment",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Send to MQTT",
+        "info": "",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0542f7ca8a8833c8",
+        "type": "status",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Status Send MQTT",
+        "scope": [
+            "19edc25a4e3eee08"
+        ],
+        "x": 810,
+        "y": 400,
+        "wires": [
+            [
+                "23ef9eb1de6c2597"
+            ]
+        ]
+    },
+    {
+        "id": "23ef9eb1de6c2597",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Send buffered msg",
+        "func": "if (msg.status.fill == \"green\"){\n    // set global status to true\n    global.set(\"MqttConnected\", true)\n    // Send buffered message\n    let MqttBuffer = global.get(\"MqttBuffer\") || []\n    if (MqttBuffer.length != 0){\n        MqttBuffer.forEach(function(element) {\n            node.send({ payload: element.Payload, topic: element.Topic }) \n        });\n        global.set(\"MqttBuffer\",[])\n    }\n} else {\n    global.set(\"MqttConnected\", false)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 400,
+        "wires": [
+            [
+                "53106cb98a75ef39"
+            ]
+        ]
+    },
+    {
+        "id": "77b7af0d99ed0dd2",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Buffer msg",
+        "func": "let MqttConnected = global.get(\"MqttConnected\") || false\nlet IsDebug = global.get(\"Debug\")\n\nif (MqttConnected){\n    // send message\n    if (IsDebug){node.warn(msg)}\n    return msg;\n} else {\n    // add msg to buffer\n    let MqttBuffer = global.get(\"MqttBuffer\") || []\n    MqttBuffer.push({\"Topic\": msg.topic, \"Payload\": msg.payload})\n    global.set(\"MqttBuffer\", MqttBuffer)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 340,
+        "wires": [
+            [
+                "19edc25a4e3eee08"
+            ]
+        ]
+    },
+    {
+        "id": "53106cb98a75ef39",
+        "type": "link out",
+        "z": "8aeba75683065aac",
+        "g": "1fbaebb2370185b6",
+        "name": "Send MQTT",
+        "mode": "link",
+        "links": [
+            "6f86aa0aa7cb8ec1"
+        ],
+        "x": 1165,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "9b75df9b21e7c1ea",
+        "type": "link out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Send MQTT",
+        "mode": "link",
+        "links": [
+            "6f86aa0aa7cb8ec1"
+        ],
+        "x": 915,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "011c7658d0da5390",
+        "type": "mqtt in",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "action/req",
+        "topic": "1234/action/req",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "c6bc15b81111a19d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 620,
+        "wires": [
+            [
+                "efb82cd274f46812"
+            ]
+        ]
+    },
+    {
+        "id": "efb82cd274f46812",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Save action",
+        "func": "let PreviousAction = global.get(\"Action\") || null\nglobal.set('Action', msg.payload.Action)\n\nif(msg.payload.Action == \"Play\"){\n    if (PreviousAction == \"Pause\"){\n        // on cree une action restart et on solicite ne noeud suivant\n        let Task = global.get(\"Task\") || null\n        if (Task != null) {\n            global.set(\"Action\", \"Restart\")\n            return { payload: true }\n        }\n    } else if (PreviousAction == \"Play\"){\n        // si l'action précédente était play alors on ne fait rien\n        return null\n    } else {\n        // Premier start, il faut construire la liste de taches via le noeud suivant\n        return { payload: msg.payload.Option }\n    }\n} else if ((msg.payload.Action == \"Stop\") && (PreviousAction == \"Pause\")) {\n    return { payload: true}\n} else if(PreviousAction == \"Play\") {\n    // si on est en mode play, on ne solicite pas le noeud suivant car la nouvelle action est enregisgtree\n    return null\n} else {\n    // on fait un reset des action enregistrees\n    global.set('Action', null)\n    return null\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 620,
+        "wires": [
+            [
+                "99a0eff9d58de191"
+            ]
+        ]
+    },
+    {
+        "id": "102e6565038457f8",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Pause",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"Action\":\"Pause\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 720,
+        "wires": [
+            [
+                "efb82cd274f46812"
+            ]
+        ]
+    },
+    {
+        "id": "01de604c06d44bf8",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Stop",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"Action\":\"Stop\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 760,
+        "wires": [
+            [
+                "efb82cd274f46812"
+            ]
+        ]
+    },
+    {
+        "id": "8e1343eeaf624133",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "1",
+        "pin": "9",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "dfbc974aadcc654e",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 720,
+        "wires": [
+            [
+                "8e1343eeaf624133"
+            ]
+        ]
+    },
+    {
+        "id": "8bb87eb2d41cf7a1",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 720,
+        "wires": [
+            [
+                "8e1343eeaf624133"
+            ]
+        ]
+    },
+    {
+        "id": "875950f1ab7ab823",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "2",
+        "pin": "10",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "bbca7d9a73dbfe6a",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 760,
+        "wires": [
+            [
+                "875950f1ab7ab823"
+            ]
+        ]
+    },
+    {
+        "id": "526991e9934d786a",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 760,
+        "wires": [
+            [
+                "875950f1ab7ab823"
+            ]
+        ]
+    },
+    {
+        "id": "8356244ea5f21ab9",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "3",
+        "pin": "22",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "6abad2caab52f3da",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 800,
+        "wires": [
+            [
+                "8356244ea5f21ab9"
+            ]
+        ]
+    },
+    {
+        "id": "e2b0a0064bb84da1",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 800,
+        "wires": [
+            [
+                "8356244ea5f21ab9"
+            ]
+        ]
+    },
+    {
+        "id": "8c27e8026ec32a69",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "4",
+        "pin": "27",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "0636dbd2f2aace3e",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 840,
+        "wires": [
+            [
+                "8c27e8026ec32a69"
+            ]
+        ]
+    },
+    {
+        "id": "f1f6d1573f470c48",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 840,
+        "wires": [
+            [
+                "8c27e8026ec32a69"
+            ]
+        ]
+    },
+    {
+        "id": "2939ba0b5b7287f5",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "5",
+        "pin": "11",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "7dc0b18e43419c01",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 880,
+        "wires": [
+            [
+                "2939ba0b5b7287f5"
+            ]
+        ]
+    },
+    {
+        "id": "3289607196db8654",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 880,
+        "wires": [
+            [
+                "2939ba0b5b7287f5"
+            ]
+        ]
+    },
+    {
+        "id": "17c91db4fa356374",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "6",
+        "pin": "4",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "41235902c176b166",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 920,
+        "wires": [
+            [
+                "17c91db4fa356374"
+            ]
+        ]
+    },
+    {
+        "id": "a1d6ddb0f6d7226d",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 920,
+        "wires": [
+            [
+                "17c91db4fa356374"
+            ]
+        ]
+    },
+    {
+        "id": "bcd04547fecc33bb",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "7",
+        "pin": "3",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "f82817a93cb2b258",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 960,
+        "wires": [
+            [
+                "bcd04547fecc33bb"
+            ]
+        ]
+    },
+    {
+        "id": "fb4acce5639e8105",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 960,
+        "wires": [
+            [
+                "bcd04547fecc33bb"
+            ]
+        ]
+    },
+    {
+        "id": "8d655773a681386c",
+        "type": "rpi-gpio out",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "8",
+        "pin": "2",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 850,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "37b89b451edfa16f",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "Off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 1000,
+        "wires": [
+            [
+                "8d655773a681386c"
+            ]
+        ]
+    },
+    {
+        "id": "28df16ca5e7ec4ca",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "bf76b4d9e21b5caf",
+        "name": "On",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 990,
+        "y": 1000,
+        "wires": [
+            [
+                "8d655773a681386c"
+            ]
+        ]
+    },
+    {
+        "id": "5a2f4dec8fae199d",
+        "type": "comment",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "Debug Mode",
+        "info": "",
+        "x": 210,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "bdde68f5d7c02d47",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "Start Debug",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "1a8e505909d0003e"
+            ]
+        ]
+    },
+    {
+        "id": "e81856e124317df6",
+        "type": "inject",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "Stop Debug",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "1a8e505909d0003e"
+            ]
+        ]
+    },
+    {
+        "id": "1a8e505909d0003e",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "Set Debug",
+        "func": "if (msg.payload){\n    global.set('Debug', true)\n    node.status({ fill: \"green\", shape: \"ring\", text: true })\n} else {\n    global.set('Debug', false)\n    node.status({ fill: \"red\", shape: \"ring\", text: false})\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    }
+]

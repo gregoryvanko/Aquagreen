@@ -48,6 +48,9 @@ class DeviceWorker {
         // Config pour les electrovanne
         this._Electrovanne = new Electrovanne(this.UpdateElectrovannesConfig.bind(this), this.ElectrovannesPlay.bind(this), this.RenderDeviceElectrovannePage.bind(this))
 
+        // Player
+        this._Player = new Player(this._DeviceConteneur)
+
         // Connection à MQTT et souscription aux topics
         this.MqttConnection()
     }
@@ -178,8 +181,7 @@ class DeviceWorker {
             
             case this._TopicActionRes:
                 if (Payload != ""){
-                    console.log(Payload)
-                    // ToDo
+                    this._Player.Show(Payload)
                 }
                 break;
         

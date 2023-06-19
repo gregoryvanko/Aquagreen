@@ -61,6 +61,8 @@ class Electrovanne {
         Conteneur.appendChild(DivButton)
         // add conteneur to divapp
         DivApp.appendChild(Conteneur) 
+        // Add patern number to input Dure
+        document.getElementById("Duree").setAttribute("pattern", "[0-9]*")
     }
 
     ClickPlay(Id, Name, TextError){

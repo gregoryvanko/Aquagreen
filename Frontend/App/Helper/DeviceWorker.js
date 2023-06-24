@@ -19,6 +19,7 @@ class DeviceWorker {
 
         // Topic pour recevoir le statu du device
         this._TopicStatus = this._Device.DeviceId + '/status'
+
         // Topic pour envoyer une demande de confiiguration du device
         this._TopicConfigReq = this._Device.DeviceId + '/config/req' 
         // Topic pour recevoir la configuration du device
@@ -27,6 +28,12 @@ class DeviceWorker {
         this._TopicConfigUpdateReq = this._Device.DeviceId + '/config/update/req' 
         // Topic pour revecoir la reponse d'un update de la config
         this._TopicConfigUpdateRes = this._Device.DeviceId + '/config/update/res' 
+        // Topic pour envoyer une demande de statu du mode debug
+        this._TopicDebugReq = this._Device.DeviceId + '/debug/req' 
+        // Topic pour recevoir le statu du mode debug
+        this._TopicDebugRes = this._Device.DeviceId + '/debug/res' 
+        // Topic pour demander un update du mode debug
+        this._TopicDebugUpdateReq = this._Device.DeviceId + '/debug/update/req' 
         // Topic pour recevoir le statu de la connexion du device
         this._TopicConnectionStatus = this._Device.DeviceId + '/connection/status'
         // Topic pour demander de demarrer une action
@@ -37,6 +44,7 @@ class DeviceWorker {
         // Constante
         this._ConstSaveElectrovanne = "SaveElectrovanne"
         this._DeviceIconStatusId = "DeviceIconStatusId"
+        this._DeviceTitreId = "DeviceTitreId"
 
         // Configuration du device
         this._DeviceConfig = null
@@ -44,6 +52,8 @@ class DeviceWorker {
         this._DeviceConnected = false
         // Queue de message a envoyer lorsque le device n'est pas connecté
         this._DeviceMqttQueue = []
+        // DebugMode
+        this._IsOnDebugMode = false
 
         // Config pour les electrovanne
         this._Electrovanne = new Electrovanne(this.UpdateElectrovannesConfig.bind(this), this.ElectrovannesPlay.bind(this), this.RenderDeviceElectrovannePage.bind(this))
@@ -62,7 +72,7 @@ class DeviceWorker {
         this._MqttClient.on('connect', () => {
             console.log('Mqtt Connected')
             // Subscribe to topics
-            this._MqttClient.subscribe( [me._TopicConfigRes, me._TopicConfigUpdateRes, me._TopicConnectionStatus, me._TopicActionRes],(err) => {
+            this._MqttClient.subscribe( [me._TopicConfigRes, me._TopicDebugRes, me._TopicConfigUpdateRes, me._TopicConnectionStatus, me._TopicActionRes],(err) => {
                 if (err) {
                     me._DisplayError(err)
                 } else {
@@ -119,7 +129,7 @@ class DeviceWorker {
         let ConteneurTitreStatu = NanoXBuild.DivFlexRowSpaceBetween("ConteneurDeviceTitreSatatus", "ConteneurDeviceTitreSatatus Largeur", null)
         Conteneur.appendChild(ConteneurTitreStatu)
         // Titre
-        ConteneurTitreStatu.appendChild(NanoXBuild.DivText(this._Device.DeviceName, null, "DeviceTtire", null))
+        ConteneurTitreStatu.appendChild(NanoXBuild.DivText(this._Device.DeviceName, this._DeviceTitreId, "DeviceTtire", null))
         // Status
         let status = NanoXBuild.Div(this._DeviceIconStatusId, "Dot", null)
         if (this._DeviceConnected){
@@ -127,6 +137,7 @@ class DeviceWorker {
         } else {
             status.style.backgroundColor = "red"
         }
+        status.onclick = this.OnClickDebug.bind(this)
         ConteneurTitreStatu.appendChild(status)
         // add conteneur to divapp
         this._DivApp.appendChild(Conteneur)
@@ -137,6 +148,20 @@ class DeviceWorker {
         this._DeviceConteneur.appendChild(NanoXBuild.DivText("Get configuration from device", null, "Texte", "margin: 1rem;"))
         // Publish a message on the topic 'TopicConfigReq'
         this.SendMqttMessage(this._TopicConfigReq, "true")
+        // Publish a message on the topic 'TopicDebugReq'
+        this.SendMqttMessage(this._TopicDebugReq, "true")
+    }
+
+    OnClickDebug(){
+        if (this._IsOnDebugMode ){
+            this._IsOnDebugMode = false
+        } else {
+            this._IsOnDebugMode = true
+        }
+        // Publish a message on the topic 'TopicDebugUpdateReq'
+        let Updatemsg = {"Debug": this._IsOnDebugMode}
+        // Send message
+        this.SendMqttMessage(this._TopicDebugUpdateReq, JSON.stringify(Updatemsg))
     }
 
     // Reception des message sur les topics souscrits
@@ -153,6 +178,19 @@ class DeviceWorker {
                 // Save Config
                 this._DeviceConfig = Payload
                 this.RenderDeviceElectrovannePage()
+                break;
+
+            case this._TopicDebugRes:
+                // Save Debug
+                this._IsOnDebugMode = Payload.Debug
+                let divtitre = document.getElementById(this._DeviceTitreId)
+                if (this._IsOnDebugMode){
+                    divtitre.innerText = "Debug: " + this._Device.DeviceName
+                    divtitre.style.color = "red"
+                } else {
+                    divtitre.innerText = this._Device.DeviceName
+                    divtitre.style.color = null
+                }
                 break;
             
             case this._TopicConnectionStatus:

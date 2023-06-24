@@ -29,7 +29,7 @@
             "452e97dc3342a945"
         ],
         "x": 114,
-        "y": 239,
+        "y": 299,
         "w": 522,
         "h": 202
     },
@@ -85,7 +85,7 @@
             "37b89b451edfa16f"
         ],
         "x": 114,
-        "y": 459,
+        "y": 539,
         "w": 1112,
         "h": 582
     },
@@ -112,7 +112,7 @@
             "53106cb98a75ef39"
         ],
         "x": 694,
-        "y": 239,
+        "y": 299,
         "w": 512,
         "h": 202
     },
@@ -133,12 +133,16 @@
             "5a2f4dec8fae199d",
             "bdde68f5d7c02d47",
             "e81856e124317df6",
-            "1a8e505909d0003e"
+            "1a8e505909d0003e",
+            "d2f16dc31306ae13",
+            "67f5d45045205783",
+            "080eb5f61c2622b7",
+            "eec211f07bc59a37"
         ],
         "x": 114,
-        "y": 39,
-        "w": 392,
-        "h": 162
+        "y": 19,
+        "w": 542,
+        "h": 262
     },
     {
         "id": "9c7bee9962d8b0d2",
@@ -200,7 +204,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 200,
-        "y": 320,
+        "y": 380,
         "wires": [
             [
                 "069f14ffa4a49596"
@@ -213,14 +217,14 @@
         "z": "8aeba75683065aac",
         "g": "cbe83244bcd55dad",
         "name": "Send Config",
-        "func": "let MyTopic = \"1234/config/res\"\n\nif (msg.payload == true){\n    // Get Config\n    let PayloadToSend = GetConfiguration()\n    return { payload: PayloadToSend, topic: MyTopic }\n}\n\n\nfunction GetConfiguration (){\n    let Config = global.get(\"Config\") || { \n        \"Electrovannes\": [\n            { \"Id\": 1, \"Name\": \"Electro 1\", \"DefautDuree\": 5 },\n            { \"Id\": 2, \"Name\": \"Electro 2\", \"DefautDuree\": 5 },\n            { \"Id\": 3, \"Name\": \"Electro 3\", \"DefautDuree\": 5 },\n            { \"Id\": 4, \"Name\": \"Electro 4\", \"DefautDuree\": 5 },\n            { \"Id\": 5, \"Name\": \"Electro 5\", \"DefautDuree\": 5 },\n            { \"Id\": 6, \"Name\": \"Electro 6\", \"DefautDuree\": 5 },\n            { \"Id\": 7, \"Name\": \"Electro 7\", \"DefautDuree\": 5 },\n            { \"Id\": 8, \"Name\": \"Electro 8\", \"DefautDuree\": 5 }\n        ],\n        \"Scenes\": [] } \n    return Config\n}",
+        "func": "let MyTopic = \"1234/config/res\"\n\nif (msg.payload == true){\n    // Get Config\n    let PayloadToSend = GetConfiguration()\n    return { payload: PayloadToSend, topic: MyTopic }\n}\n\n\nfunction GetConfiguration (){\n    let Config = global.get(\"Config\") || { \n        \"Electrovannes\": [\n            { \"Id\": 1, \"Name\": \"Electro 1\", \"DefautDuree\": 5 },\n            { \"Id\": 2, \"Name\": \"Electro 2\", \"DefautDuree\": 5 },\n            { \"Id\": 3, \"Name\": \"Electro 3\", \"DefautDuree\": 5 },\n            { \"Id\": 4, \"Name\": \"Electro 4\", \"DefautDuree\": 5 },\n            { \"Id\": 5, \"Name\": \"Electro 5\", \"DefautDuree\": 5 },\n            { \"Id\": 6, \"Name\": \"Electro 6\", \"DefautDuree\": 5 },\n            { \"Id\": 7, \"Name\": \"Electro 7\", \"DefautDuree\": 5 },\n            { \"Id\": 8, \"Name\": \"Electro 8\", \"DefautDuree\": 15 }\n        ],\n        \"Scenes\": [] } \n    return Config\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 450,
-        "y": 320,
+        "y": 380,
         "wires": [
             [
                 "452e97dc3342a945"
@@ -242,7 +246,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 230,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "5205a660d5dc0e7d"
@@ -262,7 +266,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "452e97dc3342a945"
@@ -277,7 +281,7 @@
         "name": "Configuration",
         "info": "",
         "x": 210,
-        "y": 280,
+        "y": 340,
         "wires": []
     },
     {
@@ -299,7 +303,7 @@
         "payload": "{\"Action\":\"Play\",\"Option\":[{\"Vanne\":1,\"Duree\":4},{\"Vanne\":3,\"Duree\":3}]}",
         "payloadType": "json",
         "x": 210,
-        "y": 680,
+        "y": 760,
         "wires": [
             [
                 "efb82cd274f46812"
@@ -312,14 +316,14 @@
         "z": "8aeba75683065aac",
         "g": "bf76b4d9e21b5caf",
         "name": "Build sequence",
-        "func": "let Sequence = []\nlet DureeInitTotal = 0\nlet DureeClose = 2\nlet NbVannesInit = 0\n\nlet Action = global.get(\"Action\") || null\n\nif (Action != null){\n    if (Action == \"Play\"){\n        // creation de la sequence open et close pour chaque vanne\n        msg.payload.forEach(function (OptAction) {\n            Sequence.push({\n                \"Vanne\": OptAction.Vanne, \n                \"Action\": \"Open\", \n                \"Duree\": OptAction.Duree, \n                \"DureeInit\": OptAction.Duree\n            })\n            DureeInitTotal += parseInt(OptAction.Duree)\n            Sequence.push({ \n                \"Vanne\": OptAction.Vanne,\n                \"Action\": \"Close\",\n                \"Duree\": DureeClose,\n                \"DureeInit\": DureeClose\n            })\n            DureeInitTotal += DureeClose\n            NbVannesInit += 1\n        });\n        // Save Sequence\n        global.set(\"Task\", {\n            \"DureeInitTotal\": DureeInitTotal,\n            \"NbVannesInit\": NbVannesInit,\n            \"NbVannesDone\": 0,\n            \"Sequence\": Sequence,\n            \"CurrentAction\" : \"Play\"\n        })\n    }\n    return { payload: true };\n} else {node.warn(\"global variable Action  == null\")}",
+        "func": "let Sequence = []\nlet DureeInitTotal = 0\nlet DureeClose = 2\nlet NbVannesInit = 0\nlet DureeVanneArriveeEau = 2\n\nlet Action = global.get(\"Action\") || null\n\nif (Action != null){\n    if (Action == \"Play\"){\n        // Open Vanne 8 pour l'arrivée d'eau\n        Sequence.push({\n            \"Vanne\": 8,\n            \"Action\": \"Open\",\n            \"Duree\": 0,\n            \"DureeInit\": DureeVanneArriveeEau\n        })\n        NbVannesInit += 1\n        DureeInitTotal += DureeVanneArriveeEau + 1\n        // creation de la sequence open et close pour chaque vanne\n        msg.payload.forEach(function (OptAction) {\n            Sequence.push({\n                \"Vanne\": OptAction.Vanne, \n                \"Action\": \"Open\", \n                \"Duree\": 0, \n                \"DureeInit\": parseInt(OptAction.Duree)\n            })\n            DureeInitTotal += parseInt(OptAction.Duree) + 1\n            Sequence.push({ \n                \"Vanne\": OptAction.Vanne,\n                \"Action\": \"Close\",\n                \"Duree\": 0,\n                \"DureeInit\": DureeClose\n            })\n            DureeInitTotal += DureeClose + 1\n            NbVannesInit += 1\n        });\n        // Close Vanne 8 pour l'arrivée d'eau\n        Sequence.push({\n            \"Vanne\": 8,\n            \"Action\": \"Close\",\n            \"Duree\": 0,\n            \"DureeInit\": DureeVanneArriveeEau\n        })\n        DureeInitTotal += DureeVanneArriveeEau + 1\n        // Save Sequence\n        global.set(\"Task\", {\n            \"DureeInitTotal\": DureeInitTotal,\n            \"DureeDone\": 0,\n            \"NbVannesInit\": NbVannesInit,\n            \"NbVannesDone\": 0,\n            \"Sequence\": Sequence,\n            \"CurrentAction\" : \"Play\"\n        })\n    }\n    return { payload: true };\n} else {node.warn(\"global variable Action  == null\")}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 620,
+        "y": 700,
         "wires": [
             [
                 "a855f882e62ea9c1"
@@ -332,14 +336,14 @@
         "z": "8aeba75683065aac",
         "g": "bf76b4d9e21b5caf",
         "name": "Set Action",
-        "func": "let MyTopic = \"1234/action/res\"\nlet Task = global.get(\"Task\") || null\nlet Action = global.get(\"Action\") || null\nlet IsDebug = global.get(\"Debug\")\n\nif(Action == \"Stop\"){\n    if (IsDebug) {node.warn(\"Stop\")}\n    global.set(\"Action\", null)\n    global.set(\"Task\", null)\n    // Fermer la vanne courante\n    node.send([\n        null,\n        null,\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": \"Close\" } }\n    ])\n    // envoyer le msg de stop au clients\n    Task.Sequence = []\n    Task.NbVannesDone = Task.NbVannesInit\n    Task.CurrentAction = \"Stop\"\n    node.send([\n        null,\n        { payload: Task, topic: MyTopic, retain: true },\n        null\n    ])\n    // reinitialiser le broker mqtt en effacant le dernier msg\n    node.send([\n        null,\n        { payload: \"\", topic: MyTopic, retain: true },\n        null\n    ])\n\n} else if (Action == \"Pause\") {\n    if (IsDebug) {node.warn(\"Pause\")}\n    Task.CurrentAction = \"Pause\"\n    return [\n        null,\n        { payload: Task, topic: MyTopic, retain: true },\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": \"Close\" } }\n    ]\n} else if (Action == \"Restart\"){\n    // On ouvre la vanne préalablement fermée\n    if (IsDebug){node.warn(\"Restart\")}\n    global.set('Action', \"Play\")\n    return [\n        { payload: true },\n        null,\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": Task.Sequence[0].Action } }\n    ]\n} else {\n    if (Task != null) {\n        if (Task.Sequence.length != 0) {\n            Task.CurrentAction = \"Play\"\n            // On prend la première sequence\n            let OneSequence = Task.Sequence[0]\n            // si la duree de la premiere sequence est > 0\n            if (OneSequence.Duree >= 0) {\n                // si on est execute pour la première fois la sequences\n                if (OneSequence.Duree == OneSequence.DureeInit) {\n                    // Si on ouvre une vanne, on incremente le compteur NbVannesDone\n                    if (OneSequence.Action == \"Open\") {\n                        Task.NbVannesDone += 1\n                        // Save Task in global\n                        global.set(\"Task\", Task)\n                    }\n                    // on envoie le message de statu et on execute l'action\n                    return [\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        { payload: { \"Vanne\": OneSequence.Vanne, \"Action\": OneSequence.Action } }\n                    ]\n                } else {\n                    // on envoie uniquement le message de statu\n                    return [\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        null\n                    ]\n                }\n            } else {\n                // On supprime la sequence finalisée\n                let shift = Task.Sequence.shift()\n                // Save Task in global\n                global.set(\"Task\", Task)\n                // si il y a encore des sequences a faire\n                if (Task.Sequence.length != 0) {\n                    let OneSequence = Task.Sequence[0]\n                    if (OneSequence.Duree >= 0) {\n                        if (OneSequence.Duree == OneSequence.DureeInit) {\n                            if (OneSequence.Action == \"Open\") {\n                                Task.NbVannesDone += 1\n                                // Save Task in global\n                                global.set(\"Task\", Task)\n                            }\n                            return [\n                                { payload: true },\n                                { payload: Task, topic: MyTopic, retain: true },\n                                { payload: { \"Vanne\": OneSequence.Vanne, \"Action\": OneSequence.Action } }\n                            ]\n                        } else {\n                            return [\n                                { payload: true },\n                                { payload: Task, topic: MyTopic, retain: true },\n                                null\n                            ]\n                        }\n                    }\n                } else {\n                    Task.CurrentAction = \"End\"\n                    node.send([\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        null\n                    ])\n                    node.send([\n                        null,\n                        { payload: \"\", topic: MyTopic, retain: true },\n                        null\n                    ])\n                }\n            }\n        } else {\n            // On met les variable globale à null\n            global.set(\"Action\", null)\n            global.set(\"Task\", null)\n            return [\n                null,\n                null,\n                null\n            ]\n        }\n    } else {\n        global.set(\"Action\", null)\n        if (IsDebug){node.warn(\"variable global Task is null\")}\n    }\n}\n\n",
+        "func": "let MyTopic = \"1234/action/res\"\nlet Task = global.get(\"Task\") || null\nlet Action = global.get(\"Action\") || null\nlet IsDebug = global.get(\"Debug\") || false\n\nif(Action == \"Stop\"){\n    if (IsDebug) {node.warn(\"Stop\")}\n    global.set(\"Action\", null)\n    global.set(\"Task\", null)\n    // Fermer la vanne courante\n    node.send([\n        null,\n        null,\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": \"Close\" } }\n    ])\n    // Fermer la vanne arrivee eau\n    node.send([\n        null,\n        null,\n        { payload: { \"Vanne\": 8, \"Action\": \"Close\" } }\n    ])\n    // envoyer le msg de stop au clients\n    Task.Sequence = []\n    Task.NbVannesDone = Task.NbVannesInit\n    Task.CurrentAction = \"Stop\"\n    node.send([\n        null,\n        { payload: Task, topic: MyTopic, retain: true },\n        null\n    ])\n    // reinitialiser le broker mqtt en effacant le dernier msg\n    node.send([\n        null,\n        { payload: \"\", topic: MyTopic, retain: true },\n        null\n    ])\n\n} else if (Action == \"Pause\") {\n    if (IsDebug) {node.warn(\"Pause\")}\n    Task.CurrentAction = \"Pause\"\n    return [\n        null,\n        { payload: Task, topic: MyTopic, retain: true },\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": \"Close\" } }\n    ]\n} else if (Action == \"Restart\"){\n    // On ouvre la vanne préalablement fermée\n    if (IsDebug){node.warn(\"Restart\")}\n    global.set('Action', \"Play\")\n    return [\n        { payload: true },\n        null,\n        { payload: { \"Vanne\": Task.Sequence[0].Vanne, \"Action\": Task.Sequence[0].Action } }\n    ]\n} else {\n    if (Task != null) {\n        if (Task.Sequence.length != 0) {\n            Task.CurrentAction = \"Play\"\n            // On prend la première sequence\n            let OneSequence = Task.Sequence[0]\n            // si la duree de la premiere sequence est < DureeInit\n            if (OneSequence.Duree <= OneSequence.DureeInit) {\n                // si on execute pour la première fois la sequences\n                if (OneSequence.Duree == 0) {\n                    // Si on ouvre une vanne, on incremente le compteur NbVannesDone\n                    if (OneSequence.Action == \"Open\") {\n                        if (IsDebug) { node.warn(\"new vanne to open\") }\n                        Task.NbVannesDone += 1\n                        // Save Task in global\n                        global.set(\"Task\", Task)\n                    }\n                    // on envoie le message de statu et on execute l'action\n                    if (IsDebug) { node.warn(\"Send status + action vanne + next\") }\n                    return [\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        { payload: { \"Vanne\": OneSequence.Vanne, \"Action\": OneSequence.Action } }\n                    ]\n                } else {\n                    // on envoie uniquement le message de statu\n                    if (IsDebug) { node.warn(\"Send status + next\") }\n                    return [\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        null\n                    ]\n                }\n            } else {\n                // On supprime la sequence finalisée\n                if (IsDebug) { node.warn(\"Sequence supprimee\") }\n                let shift = Task.Sequence.shift()\n                // Save Task in global\n                global.set(\"Task\", Task)\n                // si il y a encore des sequences a faire\n                if (Task.Sequence.length != 0) {\n                    let OneSequence = Task.Sequence[0]\n                    if (OneSequence.Duree <= OneSequence.DureeInit) {\n                        if (OneSequence.Duree == 0) {\n                            if (OneSequence.Action == \"Open\") {\n                                if (IsDebug) { node.warn(\"new vanne to open\") }\n                                Task.NbVannesDone += 1\n                                // Save Task in global\n                                global.set(\"Task\", Task)\n                            }\n                            if (IsDebug) { node.warn(\"Send status + action vanne + next\") }\n                            return [\n                                { payload: true },\n                                { payload: Task, topic: MyTopic, retain: true },\n                                { payload: { \"Vanne\": OneSequence.Vanne, \"Action\": OneSequence.Action } }\n                            ]\n                        } else {\n                            if (IsDebug) { node.warn(\"Send status + next\") }\n                            return [\n                                { payload: true },\n                                { payload: Task, topic: MyTopic, retain: true },\n                                null\n                            ]\n                        }\n                    }\n                } else {\n                    if (IsDebug) { node.warn(\"End\") }\n                    Task.CurrentAction = \"End\"\n                    node.send([\n                        { payload: true },\n                        { payload: Task, topic: MyTopic, retain: true },\n                        null\n                    ])\n                    node.send([\n                        null,\n                        { payload: \"\", topic: MyTopic, retain: true },\n                        null\n                    ])\n                }\n            }\n        } else {\n            if (IsDebug) { node.warn(\"Task sequence length =0\") }\n            // On met les variable globale à null\n            global.set(\"Action\", null)\n            global.set(\"Task\", null)\n            return [\n                null,\n                null,\n                null\n            ]\n        }\n    } else {\n        global.set(\"Action\", null)\n        if (IsDebug){node.warn(\"variable global Task is null\")}\n    }\n}\n\n",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 750,
-        "y": 620,
+        "y": 700,
         "wires": [
             [
                 "080d8654e4169170"
@@ -371,7 +375,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 620,
-        "y": 520,
+        "y": 600,
         "wires": [
             [
                 "098b5a26e679ba9f"
@@ -383,15 +387,15 @@
         "type": "function",
         "z": "8aeba75683065aac",
         "g": "bf76b4d9e21b5caf",
-        "name": "Durée -1",
-        "func": "let Task = global.get(\"Task\") || null\n\nif (Task != null){\n    if (Task.Sequence.length != 0) {\n        // on supprime une unite à la duree de la sequence en cours\n        let OneSequence = Task.Sequence[0]\n        Task.Sequence[0].Duree = OneSequence.Duree - 1\n        global.set(\"Task\", Task)\n    }\n    return { payload: true }\n} else {\n    global.set(\"Action\", null)\n    if (global.get(\"Debug\")) {node.warn(\"Global variable Task is null\");}\n}",
+        "name": "Durée +1",
+        "func": "let Task = global.get(\"Task\") || null\n\nif (Task != null){\n    if (Task.Sequence.length != 0) {\n        // on ajoute une unite à la duree de la sequence en cours\n        let OneSequence = Task.Sequence[0]\n        Task.Sequence[0].Duree = OneSequence.Duree + 1\n        Task.DureeDone += 1\n        global.set(\"Task\", Task)\n    }\n    return { payload: true }\n} else {\n    global.set(\"Action\", null)\n    if (global.get(\"Debug\")) {node.warn(\"Global variable Task is null\");}\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 780,
-        "y": 520,
+        "y": 600,
         "wires": [
             [
                 "a855f882e62ea9c1"
@@ -411,7 +415,7 @@
         "finalize": "",
         "libs": [],
         "x": 640,
-        "y": 860,
+        "y": 940,
         "wires": [
             [
                 "8e1343eeaf624133"
@@ -447,7 +451,7 @@
         "name": "State Machine",
         "info": "",
         "x": 210,
-        "y": 500,
+        "y": 580,
         "wires": []
     },
     {
@@ -466,7 +470,7 @@
         "expiry": "",
         "broker": "c6bc15b81111a19d",
         "x": 1010,
-        "y": 340,
+        "y": 400,
         "wires": []
     },
     {
@@ -480,7 +484,7 @@
             "6f86aa0aa7cb8ec1"
         ],
         "x": 595,
-        "y": 360,
+        "y": 420,
         "wires": []
     },
     {
@@ -492,10 +496,11 @@
         "links": [
             "452e97dc3342a945",
             "53106cb98a75ef39",
-            "9b75df9b21e7c1ea"
+            "9b75df9b21e7c1ea",
+            "080eb5f61c2622b7"
         ],
         "x": 745,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "77b7af0d99ed0dd2"
@@ -510,7 +515,7 @@
         "name": "Send to MQTT",
         "info": "",
         "x": 800,
-        "y": 280,
+        "y": 340,
         "wires": []
     },
     {
@@ -523,7 +528,7 @@
             "19edc25a4e3eee08"
         ],
         "x": 810,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "23ef9eb1de6c2597"
@@ -543,7 +548,7 @@
         "finalize": "",
         "libs": [],
         "x": 1010,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "53106cb98a75ef39"
@@ -563,7 +568,7 @@
         "finalize": "",
         "libs": [],
         "x": 850,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "19edc25a4e3eee08"
@@ -581,7 +586,7 @@
             "6f86aa0aa7cb8ec1"
         ],
         "x": 1165,
-        "y": 400,
+        "y": 460,
         "wires": []
     },
     {
@@ -595,7 +600,7 @@
             "6f86aa0aa7cb8ec1"
         ],
         "x": 915,
-        "y": 620,
+        "y": 700,
         "wires": []
     },
     {
@@ -613,7 +618,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 200,
-        "y": 620,
+        "y": 700,
         "wires": [
             [
                 "efb82cd274f46812"
@@ -633,7 +638,7 @@
         "finalize": "",
         "libs": [],
         "x": 370,
-        "y": 620,
+        "y": 700,
         "wires": [
             [
                 "99a0eff9d58de191"
@@ -659,7 +664,7 @@
         "payload": "{\"Action\":\"Pause\"}",
         "payloadType": "json",
         "x": 210,
-        "y": 720,
+        "y": 800,
         "wires": [
             [
                 "efb82cd274f46812"
@@ -685,7 +690,7 @@
         "payload": "{\"Action\":\"Stop\"}",
         "payloadType": "json",
         "x": 210,
-        "y": 760,
+        "y": 840,
         "wires": [
             [
                 "efb82cd274f46812"
@@ -705,7 +710,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 720,
+        "y": 800,
         "wires": []
     },
     {
@@ -727,7 +732,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 720,
+        "y": 800,
         "wires": [
             [
                 "8e1343eeaf624133"
@@ -753,7 +758,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 720,
+        "y": 800,
         "wires": [
             [
                 "8e1343eeaf624133"
@@ -773,7 +778,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 760,
+        "y": 840,
         "wires": []
     },
     {
@@ -795,7 +800,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 760,
+        "y": 840,
         "wires": [
             [
                 "875950f1ab7ab823"
@@ -821,7 +826,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 760,
+        "y": 840,
         "wires": [
             [
                 "875950f1ab7ab823"
@@ -841,7 +846,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 800,
+        "y": 880,
         "wires": []
     },
     {
@@ -863,7 +868,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 800,
+        "y": 880,
         "wires": [
             [
                 "8356244ea5f21ab9"
@@ -889,7 +894,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 800,
+        "y": 880,
         "wires": [
             [
                 "8356244ea5f21ab9"
@@ -909,7 +914,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 840,
+        "y": 920,
         "wires": []
     },
     {
@@ -931,7 +936,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 840,
+        "y": 920,
         "wires": [
             [
                 "8c27e8026ec32a69"
@@ -957,7 +962,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 840,
+        "y": 920,
         "wires": [
             [
                 "8c27e8026ec32a69"
@@ -977,7 +982,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 880,
+        "y": 960,
         "wires": []
     },
     {
@@ -999,7 +1004,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 880,
+        "y": 960,
         "wires": [
             [
                 "2939ba0b5b7287f5"
@@ -1025,7 +1030,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 880,
+        "y": 960,
         "wires": [
             [
                 "2939ba0b5b7287f5"
@@ -1045,7 +1050,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 920,
+        "y": 1000,
         "wires": []
     },
     {
@@ -1067,7 +1072,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "17c91db4fa356374"
@@ -1093,7 +1098,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 920,
+        "y": 1000,
         "wires": [
             [
                 "17c91db4fa356374"
@@ -1113,7 +1118,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 960,
+        "y": 1040,
         "wires": []
     },
     {
@@ -1135,7 +1140,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 960,
+        "y": 1040,
         "wires": [
             [
                 "bcd04547fecc33bb"
@@ -1161,7 +1166,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 960,
+        "y": 1040,
         "wires": [
             [
                 "bcd04547fecc33bb"
@@ -1181,7 +1186,7 @@
         "out": "out",
         "bcm": true,
         "x": 850,
-        "y": 1000,
+        "y": 1080,
         "wires": []
     },
     {
@@ -1203,7 +1208,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 1150,
-        "y": 1000,
+        "y": 1080,
         "wires": [
             [
                 "8d655773a681386c"
@@ -1229,7 +1234,7 @@
         "payload": "0",
         "payloadType": "num",
         "x": 990,
-        "y": 1000,
+        "y": 1080,
         "wires": [
             [
                 "8d655773a681386c"
@@ -1244,7 +1249,7 @@
         "name": "Debug Mode",
         "info": "",
         "x": 210,
-        "y": 80,
+        "y": 60,
         "wires": []
     },
     {
@@ -1263,10 +1268,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
+        "payload": "{ \"Debug\": true } ",
+        "payloadType": "json",
         "x": 230,
-        "y": 120,
+        "y": 100,
         "wires": [
             [
                 "1a8e505909d0003e"
@@ -1289,10 +1294,10 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "false",
-        "payloadType": "bool",
+        "payload": "{ \"Debug\": false } ",
+        "payloadType": "json",
         "x": 230,
-        "y": 160,
+        "y": 140,
         "wires": [
             [
                 "1a8e505909d0003e"
@@ -1305,16 +1310,96 @@
         "z": "8aeba75683065aac",
         "g": "be9df26fafb7f1b8",
         "name": "Set Debug",
-        "func": "if (msg.payload){\n    global.set('Debug', true)\n    node.status({ fill: \"green\", shape: \"ring\", text: true })\n} else {\n    global.set('Debug', false)\n    node.status({ fill: \"red\", shape: \"ring\", text: false})\n}",
+        "func": "let MyTopic = \"1234/debug/res\"\n\nif (msg.payload.Debug){\n    global.set('Debug', true)\n    node.status({ fill: \"green\", shape: \"ring\", text: true })\n} else {\n    global.set('Debug', false)\n    node.status({ fill: \"red\", shape: \"ring\", text: false})\n}\n\nreturn { payload: { \"Debug\": msg.payload.Debug }, topic: MyTopic }",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
+        "x": 450,
         "y": 140,
         "wires": [
-            []
+            [
+                "080eb5f61c2622b7"
+            ]
+        ]
+    },
+    {
+        "id": "d2f16dc31306ae13",
+        "type": "mqtt in",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "debug/req",
+        "topic": "1234/debug/req",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "c6bc15b81111a19d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "67f5d45045205783"
+            ]
+        ]
+    },
+    {
+        "id": "67f5d45045205783",
+        "type": "function",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "Send Debug",
+        "func": "let MyTopic = \"1234/debug/res\"\n\nif (msg.payload == true){\n    return { payload: { \"Debug\": global.get(\"Debug\") } , topic: MyTopic }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "080eb5f61c2622b7"
+            ]
+        ]
+    },
+    {
+        "id": "080eb5f61c2622b7",
+        "type": "link out",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "Send MQTT",
+        "mode": "link",
+        "links": [
+            "6f86aa0aa7cb8ec1"
+        ],
+        "x": 615,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "eec211f07bc59a37",
+        "type": "mqtt in",
+        "z": "8aeba75683065aac",
+        "g": "be9df26fafb7f1b8",
+        "name": "debug/update/req",
+        "topic": "1234/debug/update/req",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "c6bc15b81111a19d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "1a8e505909d0003e"
+            ]
         ]
     }
 ]

@@ -219,7 +219,7 @@ class DeviceWorker {
             
             case this._TopicActionRes:
                 if (Payload != ""){
-                    this._Player.Show(Payload)
+                    this._Player.Show(Payload, this._DeviceConfig)
                 }
                 break;
         

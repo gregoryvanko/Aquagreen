@@ -91,6 +91,8 @@ class Player {
             ProgressBar.setAttribute("max", 100)
             ProgressBar.setAttribute("Style", "margin-top: 0.5rem;")
             Conteneur.appendChild(ProgressBar)
+            // Add button
+            
             // Add conteneur
             this._DivApp.appendChild(Conteneur)
             // Playing = true

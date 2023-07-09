@@ -18,7 +18,7 @@ class Player {
         this._CurrentSatatusAction = null
     }
 
-    Show(Data, DeviceConfig){
+    Show(Data, Electrovannes){
         // Set Data
         this._CurrentSatatusAction = Data.CurrentAction
         let CalcProgressTotal = null
@@ -35,7 +35,7 @@ class Player {
         let CurrentVanneAction = null
         let CurrentProgressBarAction = null
         if (Data.Sequence.length > 0){
-            CurrentVanneName = this.FindVanneName(DeviceConfig, Data.Sequence[0].Vanne)
+            CurrentVanneName = this.FindVanneName(Electrovannes, Data.Sequence[0].Vanne)
             CurrentVanneAction = Data.Sequence[0].Action
             CurrentProgressBarAction = Math.floor((Data.Sequence[0].Duree / Data.Sequence[0].DureeInit) * 100)
         }
@@ -129,9 +129,9 @@ class Player {
         }
     }
 
-    FindVanneName(DeviceConfig, IdVanne){
+    FindVanneName(Electrovannes, IdVanne){
         let Name = "Vanne Name not found"
-        DeviceConfig.Electrovannes.forEach(Vanne => {
+        Electrovannes.forEach(Vanne => {
             if (Vanne.Id == IdVanne){
                 Name =  Vanne.Name
             }

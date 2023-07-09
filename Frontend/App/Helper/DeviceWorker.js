@@ -49,7 +49,7 @@ class DeviceWorker {
         // Configuration du device
         this._DeviceConfig = null
         // Statu de connextion du device
-        this._DeviceConnected = false
+        this._DeviceConnected = null
         // Queue de message a envoyer lorsque le device n'est pas connecté
         this._DeviceMqttQueue = []
         // DebugMode
@@ -132,7 +132,7 @@ class DeviceWorker {
         ConteneurTitreStatu.appendChild(NanoXBuild.DivText(this._Device.DeviceName, this._DeviceTitreId, "DeviceTtire", null))
         // Status
         let status = NanoXBuild.Div(this._DeviceIconStatusId, "Dot", null)
-        if (this._DeviceConnected){
+        if (this._DeviceConnected == true){
             status.style.backgroundColor = "green"
         } else {
             status.style.backgroundColor = "red"
@@ -175,7 +175,6 @@ class DeviceWorker {
             case this._TopicConfigUpdateRes:
                 // Save Config
                 this._DeviceConfig = Payload
-                //this.RenderDeviceElectrovannePage()
                 break;
 
             case this._TopicDebugRes:
@@ -217,7 +216,9 @@ class DeviceWorker {
             
             case this._TopicActionRes:
                 if (Payload != ""){
-                    this._Player.Show(Payload, this._DeviceConfig)
+                    if (this._DeviceConfig != null){
+                        this._Player.Show(Payload, this._DeviceConfig.Electrovannes)
+                    }
                 }
                 break;
         

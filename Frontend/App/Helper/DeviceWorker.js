@@ -59,7 +59,7 @@ class DeviceWorker {
         this._Electrovanne = new Electrovanne(this.UpdateElectrovannesConfig.bind(this), this.ElectrovannesPlay.bind(this), this.RenderDeviceElectrovannePage.bind(this))
 
         // Player
-        this._Player = new Player(this._DeviceConteneur)
+        this._Player = new Player(this._DeviceConteneur, this.PlayerActionCmd.bind(this), this.RenderDeviceStartPage.bind(this))
 
         // Connection à MQTT et souscription aux topics
         this.MqttConnection()
@@ -144,12 +144,12 @@ class DeviceWorker {
         // add ConteneurDevice to divapp
         this._DivApp.appendChild(this._DeviceConteneur)
 
-        // Add texte Get Config
-        this._DeviceConteneur.appendChild(NanoXBuild.DivText("Get configuration from device", null, "Texte", "margin: 1rem;"))
         // Publish a message on the topic 'TopicConfigReq'
         this.SendMqttMessage(this._TopicConfigReq, "true")
         // Publish a message on the topic 'TopicDebugReq'
         this.SendMqttMessage(this._TopicDebugReq, "true")
+        // Set device start page
+        this.RenderDeviceStartPage()
     }
 
     OnClickDebug(){
@@ -170,14 +170,12 @@ class DeviceWorker {
             case this._TopicConfigRes:
                 // Save Config
                 this._DeviceConfig = Payload
-                // Set device start page
-                this.RenderDeviceStartPage()
                 break;
             
             case this._TopicConfigUpdateRes:
                 // Save Config
                 this._DeviceConfig = Payload
-                this.RenderDeviceElectrovannePage()
+                //this.RenderDeviceElectrovannePage()
                 break;
 
             case this._TopicDebugRes:
@@ -250,7 +248,6 @@ class DeviceWorker {
         // Add Back button in settings menu
         NanoXAddMenuButtonSettings("Back", "Back", IconModule.Back(), this.BackToStartPage.bind(this))
         
-
         // Boutton Electrovannes
         let ConteneurElectrovanne = NanoXBuild.DivFlexRowSpaceEvenly(null, "ConteneurDevice Largeur", null)
         ConteneurElectrovanne.appendChild(NanoXBuild.DivText("Electrovannes", null, "Text", ""))
@@ -265,6 +262,8 @@ class DeviceWorker {
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
         DivButton.appendChild(NanoXBuild.Button("Back", this.BackToStartPage.bind(this), "Back", "Button Text WidthButton1", null))
         this._DeviceConteneur.appendChild(DivButton)
+        // Espace vide
+        this._DeviceConteneur.appendChild(NanoXBuild.Div(null, null, "height: 2rem;"))
     }
 
     // Clear all data and go back to start page
@@ -289,16 +288,24 @@ class DeviceWorker {
         let Conteneur = NanoXBuild.DivFlexColumn("Conteneur", null, "width: 100%;")
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText("Electrovannes", null, "Titre", null))
-        // Add all electrovanne
-        this._DeviceConfig.Electrovannes.forEach(Electrovanne => {
-            Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne)))
-        });
+        
+        if (this._DeviceConfig != null){
+            // Add all electrovanne
+            this._DeviceConfig.Electrovannes.forEach(Electrovanne => {
+                Conteneur.appendChild(this.RenderButtonAction(Electrovanne.Name, this.ClickOnElectrovanne.bind(this, Electrovanne), this.ClickOnTreeDotsElectrovanne.bind(this, Electrovanne)))
+            });
+        } else {
+            // Add texte Get Config
+            Conteneur.appendChild(NanoXBuild.DivText("No configuration get from device", null, "Texte", "margin: 1rem;"))
+        }
         // Button back
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
         DivButton.appendChild(NanoXBuild.Button("Back", this.RenderDeviceStartPage.bind(this), "Back", "Button Text WidthButton1", null))
         Conteneur.appendChild(DivButton)
         // add conteneur to divapp
-        this._DeviceConteneur.appendChild(Conteneur) 
+        this._DeviceConteneur.appendChild(Conteneur)
+        // Espace vide
+        this._DeviceConteneur.appendChild(NanoXBuild.Div(null, null, "height: 2rem;"))
     }
 
     // afficher la page Scene
@@ -330,6 +337,8 @@ class DeviceWorker {
         DivButton.appendChild(NanoXBuild.Button("Back", this.RenderDeviceStartPage.bind(this), "Back", "Button Text WidthButton1", null))
         // add conteneur to divapp
         this._DeviceConteneur.appendChild(Conteneur) 
+        // Espace vide
+        this._DeviceConteneur.appendChild(NanoXBuild.Div(null, null, "height: 2rem;"))
     }
 
     // Boutton pour les Electrovanne et les scenes
@@ -375,6 +384,14 @@ class DeviceWorker {
         this._Electrovanne.RenderConfig(this._DeviceConteneur, Electrovanne)
     }
 
+    // Action qui viennent du player
+    PlayerActionCmd(Cmd){
+        // Publish a message on the topic 'TopicConfigUpdateReq'
+        let Actionemsg = {"Action":Cmd}
+        // Send message
+        this.SendMqttMessage(this._TopicActionReq, JSON.stringify(Actionemsg))
+    }
+
     // Update the config with the new Electrovanne
     UpdateElectrovannesConfig(){
         // L'éléctrovanne a ete passée en ref, this._DeviceConfig a donc été updaté automatiquement
@@ -386,6 +403,8 @@ class DeviceWorker {
         let Updatemsg = {"Config": this._DeviceConfig}
         // Send message
         this.SendMqttMessage(this._TopicConfigUpdateReq, JSON.stringify(Updatemsg))
+        // Render page
+        this.RenderDeviceElectrovannePage()
     }
 
     // Click on Scene Action

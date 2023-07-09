@@ -1,6 +1,6 @@
 {
   "name": "@gregvanko/aquagreen",
-  "version": "3.19.0",
+  "version": "3.20.0",
   "description": "Aquagreen",
   "main": "index.js",
   "scripts": {

@@ -17,9 +17,6 @@ class DeviceWorker {
         this._MqttClient = null
         this._MqttFristConnection = true
 
-        // Topic pour recevoir le statu du device
-        this._TopicStatus = this._Device.DeviceId + '/status'
-
         // Topic pour envoyer une demande de confiiguration du device
         this._TopicConfigReq = this._Device.DeviceId + '/config/req' 
         // Topic pour recevoir la configuration du device
@@ -56,7 +53,10 @@ class DeviceWorker {
         this._IsOnDebugMode = false
 
         // Config pour les electrovanne
-        this._Electrovanne = new Electrovanne(this.UpdateElectrovannesConfig.bind(this), this.ElectrovannesPlay.bind(this), this.RenderDeviceElectrovannePage.bind(this))
+        this._Electrovanne = new Electrovanne(this.UpdateConfig.bind(this), this.ElectrovannesPlay.bind(this), this.RenderDeviceElectrovannePage.bind(this))
+
+        // Config pour les scene
+        this._Scene = new Scene(this.AddScenetoConfig.bind(this), this.UpdateSceneConfig.bind(this), this.DeleteSceneConfig.bind(this), this.RenderDeviceScenePage.bind(this))
 
         // Player
         this._Player = new Player(this._DeviceConteneur, this.PlayerActionCmd.bind(this), this.RenderDeviceStartPage.bind(this))
@@ -228,6 +228,7 @@ class DeviceWorker {
         }
     }
 
+    // Send MQTT Message or add in queue
     SendMqttMessage( Topic = null, Payload = "", Option = { qos: 0, retain: false }){
         if (Topic != null){
             if (this._DeviceConnected){
@@ -324,7 +325,7 @@ class DeviceWorker {
         // Add all scenes
         if (this._DeviceConfig.Scenes.length != 0){
             this._DeviceConfig.Scenes.forEach(Scene => {
-                Conteneur.appendChild(this.RenderButtonAction(Scene.Name, this.ClickOnScene.bind(this, Scene.Id), this.ClickOnTreeDotsScene.bind(this, Scene.Id)))
+                Conteneur.appendChild(this.RenderButtonAction(Scene.Name, this.ClickOnScene.bind(this, Scene.Name, Scene.Sequence), this.ClickOnTreeDotsScene.bind(this, Scene)))
             });
         } else {
             Conteneur.appendChild(NanoXBuild.DivText("No scene defined", null, "Text", ""))
@@ -394,7 +395,7 @@ class DeviceWorker {
     }
 
     // Update the config with the new Electrovanne
-    UpdateElectrovannesConfig(){
+    UpdateConfig(IsTypeElectrovanne = true){
         // L'éléctrovanne a ete passée en ref, this._DeviceConfig a donc été updaté automatiquement
         // Clear view
         this._DeviceConteneur.innerHTML = ""
@@ -405,25 +406,51 @@ class DeviceWorker {
         // Send message
         this.SendMqttMessage(this._TopicConfigUpdateReq, JSON.stringify(Updatemsg))
         // Render page
-        this.RenderDeviceElectrovannePage()
+        if (IsTypeElectrovanne){
+            this.RenderDeviceElectrovannePage()
+        } else {
+            this.RenderDeviceScenePage()
+        }
+        
     }
 
     // Click on Scene Action
-    ClickOnScene(Id){
-        alert("Treedots: " +Id)
-        // ToDo
+    ClickOnScene(Name, Sequence){
+        // Clear view
+        this._DeviceConteneur.innerHTML = ""
+        // Add texte
+        this._DeviceConteneur.appendChild(NanoXBuild.DivText(`Start scène: ${Name}`, null, "Texte", "margin: 1rem;"))
+        // Publish a message on the topic 'TopicConfigUpdateReq'
+        let Actionemsg = {"Action":"Play", "Option":Sequence}
+        // Send message
+        this.SendMqttMessage(this._TopicActionReq, JSON.stringify(Actionemsg))
     }
 
     // Click on Scene TreeDots
-    ClickOnTreeDotsScene(Id){
-        alert("Treedots: " +Id)
-        // ToDo
+    ClickOnTreeDotsScene(Scene){
+        this._Scene.RenderAddModScene(this._DeviceConteneur, Scene)
     }
 
     // Click on Add Scene
     ClickOnAddScene(){
-        alert("Add Scene")
-        // ToDo
+        // Load add Scene Config
+        this._Scene.RenderAddModScene(this._DeviceConteneur)
+    }
+
+    AddScenetoConfig(Scene){
+        // Add scene to Device Config
+        this._DeviceConfig.Scenes.push(Scene)
+        this.UpdateConfig(false)
+    }
+
+    UpdateSceneConfig(){
+        this.UpdateConfig(false)
+    }
+
+    DeleteSceneConfig (Scene){
+        this._DeviceConfig.Scenes = this._DeviceConfig.Scenes.filter(function(el) { return el.Name != Scene.Name; }); 
+        console.log(this._DeviceConfig.Scenes)
+        this.UpdateConfig(false)
     }
 
     // Clear MenuButton

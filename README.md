@@ -19,7 +19,7 @@ const Option = {
 require('@gregvanko/aquagreen').Start(Option)
 ```
 
-It is possible to start the application with default values (Port=9000, Name=Ap2a, Debug=false, SplashScreenFilePath= default splach screen):
+It is possible to start the application with default values (Port=9000, Name=Aquagreen, Debug=false, SplashScreenFilePath= default splach screen):
 ```js
 require('@gregvanko/aquagreen').Start()
 ```

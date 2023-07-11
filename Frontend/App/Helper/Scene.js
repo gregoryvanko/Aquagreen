@@ -19,7 +19,7 @@ class Scene {
         Conteneur.appendChild(NanoXBuild.InputWithLabel("Largeur InputWithLabelBox", "Nom scene:", "Text", "SceneName", Scene.Name, "Input Text", "text", "Name", null, true))
         // ToDo add vanne
         this._VanneInScene = Scene.Sequence
-        
+        // Test
 
         // Text error
         let TextError = NanoXBuild.DivText("", null, "Text", "color: red; margin: 1rem;")

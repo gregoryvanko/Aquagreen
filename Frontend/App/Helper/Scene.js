@@ -75,7 +75,7 @@ class Scene {
             let BoxVanneInScene = NanoXBuild.DivFlexRowSpaceBetween(null, "Largeur BoxVanneInScene", "")
             // Selection de la vanne
             // Selection de la duree
-            // ToDo
+            // ToDo add
             BoxVanneInScene.appendChild(NanoXBuild.Input())
             Conteneur.appendChild(BoxVanneInScene)
         });

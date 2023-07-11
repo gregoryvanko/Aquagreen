@@ -25,4 +25,4 @@ require('@gregvanko/aquagreen').Start()
 ```
 
 ## Env variable
-PORT and MONGOURL are available as env variables
+PORT and MONGOURL are available as env variables.

@@ -4,11 +4,13 @@ class Scene {
         this._UpdateSceneConfig = UpdateSceneConfig
         this._DeleteSceneConfig = DeleteSceneConfig
         this._RenderDeviceScenePage = RenderDeviceScenePage
-        this._InitVanne = {"Vanne":1,"Duree":1}
+        this._InitScene =  {"Vanne":1,"Duree":1}
         this._VanneInScene = null
+
+        this._IdConteneurVannesInScene = "ConteneurVannesInScene"
     }
 
-    RenderAddModScene(DivApp, Scene = {"Name" : "", "Sequence" : [this._VanneInScene]}){
+    RenderAddModScene(DivApp, Scene = {"Name" : "Scene 1", "Sequence" : [this._InitScene]}){
         // Clear view
         DivApp.innerHTML = ""
         // Conteneur
@@ -17,17 +19,18 @@ class Scene {
         Conteneur.appendChild(NanoXBuild.DivText("Add Scene", null, "Titre", null))
         // Name
         Conteneur.appendChild(NanoXBuild.InputWithLabel("Largeur InputWithLabelBox", "Nom scene:", "Text", "SceneName", Scene.Name, "Input Text", "text", "Name", null, true))
-        // ToDo add vanne
+        // Add vanne
         this._VanneInScene = Scene.Sequence
-        // Test
-
+        let ConteneurForScene = NanoXBuild.DivFlexColumn(this._IdConteneurVannesInScene, null, "width: 100%;")
+        Conteneur.appendChild(ConteneurForScene)
+        this.AddVannesinSceneInConteneur(ConteneurForScene)
         // Text error
         let TextError = NanoXBuild.DivText("", null, "Text", "color: red; margin: 1rem;")
         Conteneur.appendChild(TextError)
         // Add button controle
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
         if (Scene.Name == ""){
-            DivButton.appendChild(NanoXBuild.Button("Add", this.ClickAddUpdateConfig.bind(this, true, TextError), "Add", "Button Text WidthButton1", null))
+            DivButton.appendChild(NanoXBuild.Button("Add", this.ClickAddUpdateConfig.bind(this, true, TextError, null), "Add", "Button Text WidthButton1", null))
         } else {
             DivButton.appendChild(NanoXBuild.Button("Update", this.ClickAddUpdateConfig.bind(this, false, TextError, Scene), "Update", "Button Text WidthButton1", null))
         }
@@ -63,5 +66,17 @@ class Scene {
         if (confirm("Delete Scene") == true) {
             this._DeleteSceneConfig(Scene)
           }
+    }
+
+    AddVannesinSceneInConteneur(Conteneur){
+        let IndexVanne = 0
+        this._VanneInScene.forEach(Vanne => {
+            // Box de la description de la vanne
+            let BoxVanneInScene = NanoXBuild.DivFlexRowSpaceBetween(null, "Largeur BoxVanneInScene", "")
+            // Selection de la vanne
+            // Selection de la duree
+            BoxVanneInScene.appendChild(NanoXBuild.Input())
+            Conteneur.appendChild(BoxVanneInScene)
+        });
     }
 }

@@ -63,3 +63,11 @@
 .InputWithLabelBox{
     margin-bottom: 1rem;
 }
+
+.BoxVanneInScene{
+    height: 4rem;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 10px;
+}

@@ -4,9 +4,11 @@ class Scene {
         this._UpdateSceneConfig = UpdateSceneConfig
         this._DeleteSceneConfig = DeleteSceneConfig
         this._RenderDeviceScenePage = RenderDeviceScenePage
+        this._InitVanne = {"Vanne":1,"Duree":1}
+        this._VanneInScene = null
     }
 
-    RenderAddModScene(DivApp, Scene = {"Name" : "", "Sequence" : []}){
+    RenderAddModScene(DivApp, Scene = {"Name" : "", "Sequence" : [this._VanneInScene]}){
         // Clear view
         DivApp.innerHTML = ""
         // Conteneur
@@ -16,6 +18,7 @@ class Scene {
         // Name
         Conteneur.appendChild(NanoXBuild.InputWithLabel("Largeur InputWithLabelBox", "Nom scene:", "Text", "SceneName", Scene.Name, "Input Text", "text", "Name", null, true))
         // ToDo add vanne
+        this._VanneInScene = Scene.Sequence
 
         // Text error
         let TextError = NanoXBuild.DivText("", null, "Text", "color: red; margin: 1rem;")
@@ -42,13 +45,11 @@ class Scene {
         // Verifier si les donnees input sont differentes de vide
         if(Name != ""){
             if (IsAdd){
-                //let Scene = {"Name" : Name, "Sequence" : []}
-                // ToDo add vanne
-                let Scene = {"Name" : Name, "Sequence" : [{"Vanne":3,"Duree":1}, {"Vanne":4,"Duree":2}]}
+                let Scene = {"Name" : Name, "Sequence" : this._VanneInScene}
                 this._AddScenetoConfig(Scene)
             } else {
                 Scene.Name = Name
-                // ToDo add vanne
+                Scene.Sequence = this._VanneInScene
                 this._UpdateSceneConfig()
             }
             

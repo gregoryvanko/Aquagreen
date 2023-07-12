@@ -70,6 +70,8 @@ class Scene {
 
     AddVannesinSceneInConteneur(Conteneur){
         let IndexVanne = 0
+        // On efface le conteneur
+        Conteneur.innerHTML = ""
         this._VanneInScene.forEach(Vanne => {
             // Box de la description de la vanne
             let BoxVanneInScene = NanoXBuild.DivFlexRowSpaceBetween(null, "Largeur BoxVanneInScene", "")

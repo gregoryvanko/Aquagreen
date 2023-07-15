@@ -77,8 +77,11 @@ class Scene {
             let BoxVanneInScene = NanoXBuild.DivFlexRowSpaceBetween(null, "Largeur BoxVanneInScene", "")
             // Selection de la vanne
             // Selection de la duree
-            // ToDo
-            BoxVanneInScene.appendChild(NanoXBuild.Input())
+            let InputDuree = NanoXBuild.Input(Vanne.Duree, "number", "Duree", null, "", "width: 100%;")
+            InputDuree.setAttribute("autocomplete", "off")
+            InputDuree.setAttribute("pattern", "[0-9]*")
+            BoxVanneInScene.appendChild(InputDuree)
+            // Delete button
             Conteneur.appendChild(BoxVanneInScene)
         });
     }

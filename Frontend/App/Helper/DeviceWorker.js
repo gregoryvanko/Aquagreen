@@ -428,13 +428,13 @@ class DeviceWorker {
 
     // Click on Scene TreeDots
     ClickOnTreeDotsScene(Scene){
-        this._Scene.RenderAddModScene(this._DeviceConteneur, Scene)
+        this._Scene.RenderAddModScene(this._DeviceConteneur, this._DeviceConfig.Electrovannes, Scene)
     }
 
     // Click on Add Scene
     ClickOnAddScene(){
         // Load add Scene Config
-        this._Scene.RenderAddModScene(this._DeviceConteneur)
+        this._Scene.RenderAddModScene(this._DeviceConteneur, this._DeviceConfig.Electrovannes)
     }
 
     AddScenetoConfig(Scene){
@@ -449,7 +449,6 @@ class DeviceWorker {
 
     DeleteSceneConfig (Scene){
         this._DeviceConfig.Scenes = this._DeviceConfig.Scenes.filter(function(el) { return el.Name != Scene.Name; }); 
-        console.log(this._DeviceConfig.Scenes)
         this.UpdateConfig(false)
     }
 

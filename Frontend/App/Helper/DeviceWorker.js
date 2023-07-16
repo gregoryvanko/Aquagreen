@@ -290,7 +290,7 @@ class DeviceWorker {
         let Conteneur = NanoXBuild.DivFlexColumn("Conteneur", null, "width: 100%;")
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText("Electrovannes", null, "Titre", null))
-        
+        // Add all electrovanne
         if (this._DeviceConfig != null){
             // Add all electrovanne
             this._DeviceConfig.Electrovannes.forEach(Electrovanne => {
@@ -323,18 +323,27 @@ class DeviceWorker {
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText("Scenes", null, "Titre", null))
         // Add all scenes
-        if (this._DeviceConfig.Scenes.length != 0){
-            this._DeviceConfig.Scenes.forEach(Scene => {
-                Conteneur.appendChild(this.RenderButtonAction(Scene.Name, this.ClickOnScene.bind(this, Scene.Name, Scene.Sequence), this.ClickOnTreeDotsScene.bind(this, Scene)))
-            });
-        } else {
-            Conteneur.appendChild(NanoXBuild.DivText("No scene defined", null, "Text", ""))
+        if (this._DeviceConfig != null){
+            if (this._DeviceConfig.Scenes.length != 0){
+                let SceneCount = 0
+                this._DeviceConfig.Scenes.forEach(Scene => {
+                    Conteneur.appendChild(this.RenderButtonAction(Scene.Name, this.ClickOnScene.bind(this, Scene.Name, Scene.Sequence), this.ClickOnTreeDotsScene.bind(this, Scene, SceneCount)))
+                    SceneCount ++
+                });
+            } else {
+                Conteneur.appendChild(NanoXBuild.DivText("No scene defined", null, "Text", ""))
+            }
+        }else {
+            // Add texte Get Config
+            Conteneur.appendChild(NanoXBuild.DivText("No configuration get from device", null, "Texte", "margin: 1rem;"))
         }
         // Div Button
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "margin-top: 3rem;")
         Conteneur.appendChild(DivButton)
         // Button Add Scene
-        DivButton.appendChild(NanoXBuild.Button("Add Scene", this.ClickOnAddScene.bind(this), "addscene", "Button Text WidthButton1", null))
+        if (this._DeviceConfig != null){
+            DivButton.appendChild(NanoXBuild.Button("Add Scene", this.ClickOnAddScene.bind(this), "addscene", "Button Text WidthButton1", null))
+        }
         // Button Back
         DivButton.appendChild(NanoXBuild.Button("Back", this.RenderDeviceStartPage.bind(this), "Back", "Button Text WidthButton1", null))
         // add conteneur to divapp
@@ -427,8 +436,8 @@ class DeviceWorker {
     }
 
     // Click on Scene TreeDots
-    ClickOnTreeDotsScene(Scene){
-        this._Scene.RenderAddModScene(this._DeviceConteneur, this._DeviceConfig.Electrovannes, Scene)
+    ClickOnTreeDotsScene(Scene, SceneCount){
+        this._Scene.RenderAddModScene(this._DeviceConteneur, this._DeviceConfig.Electrovannes, Scene, SceneCount)
     }
 
     // Click on Add Scene
@@ -443,7 +452,8 @@ class DeviceWorker {
         this.UpdateConfig(false)
     }
 
-    UpdateSceneConfig(){
+    UpdateSceneConfig(Scene, SceneCount){
+        this._DeviceConfig.Scenes[SceneCount] = Scene
         this.UpdateConfig(false)
     }
 

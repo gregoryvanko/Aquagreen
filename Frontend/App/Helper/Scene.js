@@ -13,7 +13,7 @@ class Scene {
         this._IdInputVanneDuree = "InputVanneDuree"
     }
 
-    RenderAddModScene(DivApp, Electrovannes, Scene = {"Name" : "", "Sequence" : [{"Vanne":1,"Duree":5}]}){
+    RenderAddModScene(DivApp, Electrovannes, Scene = {"Name" : "", "Sequence" : [{"Vanne":1,"Duree":5}]}, SceneCount = null){
         this._Electrovannes = Electrovannes
         // Clear view
         DivApp.innerHTML = ""
@@ -36,9 +36,9 @@ class Scene {
         // Add button controle
         let DivButton = NanoXBuild.DivFlexRowSpaceAround(null, "Largeur", "")
         if (Scene.Name == ""){
-            DivButton.appendChild(NanoXBuild.Button("Add", this.ClickAddUpdateConfig.bind(this, true, TextError, null), "Add", "Button Text WidthButton1", null))
+            DivButton.appendChild(NanoXBuild.Button("Add", this.ClickAddUpdateConfig.bind(this, true, TextError, null, null), "Add", "Button Text WidthButton1", null))
         } else {
-            DivButton.appendChild(NanoXBuild.Button("Update", this.ClickAddUpdateConfig.bind(this, false, TextError, Scene), "Update", "Button Text WidthButton1", null))
+            DivButton.appendChild(NanoXBuild.Button("Update", this.ClickAddUpdateConfig.bind(this, false, TextError, Scene, SceneCount), "Update", "Button Text WidthButton1", null))
         }
         DivButton.appendChild(NanoXBuild.Button("Cancel", this.ClickCancel.bind(this), "Cancel", "Button Text WidthButton1", null))
         if (Scene.Name != ""){
@@ -56,19 +56,17 @@ class Scene {
         this._RenderDeviceScenePage()
     }
 
-    ClickAddUpdateConfig(IsAdd, TextError, Scene = null){
+    ClickAddUpdateConfig(IsAdd, TextError, Scene = null, SceneCount = null){
         let Name = document.getElementById("SceneName").value
         // Verifier si les donnees input sont differentes de vide
         if(Name != ""){
+            this.SaveVanneInScene()
+            let SceneUpdate = {"Name" : Name, "Sequence" : this._VanneInScene}
             if (IsAdd){
-                let Scene = {"Name" : Name, "Sequence" : this._VanneInScene}
-                this._AddScenetoConfig(Scene)
+                this._AddScenetoConfig(SceneUpdate)
             } else {
-                Scene.Name = Name
-                Scene.Sequence = this._VanneInScene
-                this._UpdateSceneConfig()
+                this._UpdateSceneConfig(SceneUpdate, SceneCount)
             }
-            
         } else {
             TextError.innerText = "Empty value!"
         }
@@ -81,7 +79,6 @@ class Scene {
     }
 
     AddVannesinSceneInConteneur(Conteneur){
-        //let me = this
         let ListeOfValue = this.GetListeOfVanne()
         let IndexVanne = 0
         // On efface le conteneur
@@ -116,8 +113,7 @@ class Scene {
                 },
                 onSelect: function(item) {
                     document.getElementById(IdInputVanne).value = item.label;
-                    //let id = parseInt(IdInputVanne.replace('Input', ''))
-                    //me._VanneInScene[id].Vanne = me.FindVanneId(item.label)
+                    document.getElementById(IdInputVanne).blur()
                 },
                 customize: function(input, inputRect, container, maxHeight) {
                     container.style.textAlign = "right"

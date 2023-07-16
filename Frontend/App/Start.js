@@ -31,7 +31,7 @@ class Start {
     // Build all Nanox menu Button
     BuildMenuButton(){
         // Menu bar Translucide
-        NanoXSetMenuBarTranslucide(false)
+        NanoXSetMenuBarTranslucide(true)
         // clear menu button left
         NanoXClearMenuButtonLeft()
         // clear menu button right
@@ -39,7 +39,7 @@ class Start {
         // clear menu button setttings
         NanoXClearMenuButtonSettings()
         // Show name in menu bar
-        NanoXShowNameInMenuBar(true)
+        NanoXShowNameInMenuBar(false)
     }
 
     // retunr div with error message

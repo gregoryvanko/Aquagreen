@@ -90,6 +90,7 @@ class Scene {
             let IdInputVanne = "Input" + IndexVanne
             // Box de la description de la vanne
             let BoxVanneInScene = NanoXBuild.DivFlexRowSpaceBetween(null, "Largeur BoxVanneInScene", "")
+            BoxVanneInScene.setAttribute("Name", this._IdInputVanne)
             // Selection de la vanne
             let Myinput = NanoXBuild.Input(this.FindVanneName(Vanne.Vanne), "text", this._IdInputVanneName, "Nom", IdInputVanne, "Input Text", "width: 65%; margin: 0rem")
             Myinput.autocomplete = "off"
@@ -169,9 +170,13 @@ class Scene {
     }
 
     SaveVanneInScene(){
-        let Vannes = document.getElementsByName(this._IdInputVanneName)
+        this._VanneInScene = []
+        let Vannes = document.getElementsByName(this._IdInputVanne)
         Vannes.forEach(OneInputVanne => {
-            
+            let Inputs = OneInputVanne.getElementsByTagName("input")
+            let Nom = Inputs[0].value
+            let Duree = Inputs[1].value
+            this._VanneInScene.push({"Vanne": this.FindVanneId(Nom),"Duree":Duree})
         });
     }
 

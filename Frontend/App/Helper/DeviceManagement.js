@@ -114,6 +114,8 @@ class DeviceManagement {
         this._DivApp.innerHTML = ""
         // Conteneur
         let Conteneur = NanoXBuild.DivFlexColumn("Conteneur", null, "width: 100%;")
+        // Espace vide
+        Conteneur.appendChild(NanoXBuild.Div(null, null, "height: 1rem;"))
         // Titre
         Conteneur.appendChild(NanoXBuild.DivText("Your devices", null, "Titre", null))
         Devices.forEach(element => {

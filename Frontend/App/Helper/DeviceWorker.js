@@ -115,7 +115,6 @@ class DeviceWorker {
 
     // Start de l'application
     Start(){
-        let me = this
         // Clear view
         this._DivApp.innerHTML = ""
         this._DeviceConteneur.innerHTML = ""
@@ -125,6 +124,8 @@ class DeviceWorker {
         NanoXAddMenuButtonSettings("Back", "Back", IconModule.Back(), this.BackToStartPage.bind(this))
         // Conteneur
         let Conteneur = NanoXBuild.DivFlexColumn("Conteneur", null, "width: 100%;")
+        // Espace vide
+        Conteneur.appendChild(NanoXBuild.Div(null, null, "height: 1rem;"))
         // Conteneur titre et satatu 
         let ConteneurTitreStatu = NanoXBuild.DivFlexRowSpaceBetween("ConteneurDeviceTitreSatatus", "ConteneurDeviceTitreSatatus Largeur", null)
         Conteneur.appendChild(ConteneurTitreStatu)

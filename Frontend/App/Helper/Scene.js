@@ -8,6 +8,9 @@ class Scene {
         this._Electrovannes = null
 
         this._IdConteneurVannesInScene = "ConteneurVannesInScene"
+        this._IdInputVanne = "InputVanne"
+        this._IdInputVanneName = "InputVanneName"
+        this._IdInputVanneDuree = "InputVanneDuree"
     }
 
     RenderAddModScene(DivApp, Electrovannes, Scene = {"Name" : "", "Sequence" : [{"Vanne":1,"Duree":5}]}){
@@ -37,7 +40,7 @@ class Scene {
         } else {
             DivButton.appendChild(NanoXBuild.Button("Update", this.ClickAddUpdateConfig.bind(this, false, TextError, Scene), "Update", "Button Text WidthButton1", null))
         }
-        DivButton.appendChild(NanoXBuild.Button("Cancel", this._RenderDeviceScenePage, "Cancel", "Button Text WidthButton1", null))
+        DivButton.appendChild(NanoXBuild.Button("Cancel", this.ClickCancel.bind(this), "Cancel", "Button Text WidthButton1", null))
         if (Scene.Name != ""){
             DivButton.appendChild(NanoXBuild.Button("Delete Scene", this.DeleteScene.bind(this, Scene), "Delete", "Button Text WidthButton1", null))
         }
@@ -45,6 +48,12 @@ class Scene {
 
         // add conteneur to divapp
         DivApp.appendChild(Conteneur) 
+    }
+
+    ClickCancel(){
+        this._VanneInScene = null
+        this._Electrovannes = null
+        this._RenderDeviceScenePage()
     }
 
     ClickAddUpdateConfig(IsAdd, TextError, Scene = null){
@@ -72,7 +81,7 @@ class Scene {
     }
 
     AddVannesinSceneInConteneur(Conteneur){
-        let me = this
+        //let me = this
         let ListeOfValue = this.GetListeOfVanne()
         let IndexVanne = 0
         // On efface le conteneur
@@ -82,7 +91,7 @@ class Scene {
             // Box de la description de la vanne
             let BoxVanneInScene = NanoXBuild.DivFlexRowSpaceBetween(null, "Largeur BoxVanneInScene", "")
             // Selection de la vanne
-            let Myinput = NanoXBuild.Input(this.FindVanneName(Vanne.Vanne), "text", IdInputVanne, "Nom", IdInputVanne, "Input Text", "width: 65%; margin: 0rem")
+            let Myinput = NanoXBuild.Input(this.FindVanneName(Vanne.Vanne), "text", this._IdInputVanneName, "Nom", IdInputVanne, "Input Text", "width: 65%; margin: 0rem")
             Myinput.autocomplete = "off"
             Myinput.setAttribute("inputmode","none")
             Myinput.setAttribute ("onfocus" , "this.value = ''; ")
@@ -106,8 +115,8 @@ class Scene {
                 },
                 onSelect: function(item) {
                     document.getElementById(IdInputVanne).value = item.label;
-                    let id = parseInt(IdInputVanne.replace('Input', ''))
-                    me._VanneInScene[id].Vanne = me.FindVanneId(item.label)
+                    //let id = parseInt(IdInputVanne.replace('Input', ''))
+                    //me._VanneInScene[id].Vanne = me.FindVanneId(item.label)
                 },
                 customize: function(input, inputRect, container, maxHeight) {
                     container.style.textAlign = "right"
@@ -124,7 +133,7 @@ class Scene {
                 disableAutoSelect: false
             });
             // Selection de la duree
-            let InputDuree = NanoXBuild.Input(Vanne.Duree, "number", null, "Duree", null, "Input Text", "width: 20%; ; margin: 0rem")
+            let InputDuree = NanoXBuild.Input(Vanne.Duree, "number", this._IdInputVanneDuree, "Duree", null, "Input Text", "width: 20%; ; margin: 0rem")
             InputDuree.setAttribute("autocomplete", "off")
             InputDuree.setAttribute("pattern", "[0-9]*")
             BoxVanneInScene.appendChild(InputDuree)
@@ -144,6 +153,7 @@ class Scene {
 
     DeleteVanneInScene(Number){
         if (this._VanneInScene.length > 1){
+            this.SaveVanneInScene()
             this._VanneInScene.splice(Number, 1)
             this.AddVannesinSceneInConteneur(document.getElementById(this._IdConteneurVannesInScene))
         } else {
@@ -153,8 +163,16 @@ class Scene {
     }
 
     ClickAddVanne(){
+        this.SaveVanneInScene()
         this._VanneInScene.push({"Vanne":1,"Duree":5})
         this.AddVannesinSceneInConteneur(document.getElementById(this._IdConteneurVannesInScene))
+    }
+
+    SaveVanneInScene(){
+        let Vannes = document.getElementsByName(this._IdInputVanneName)
+        Vannes.forEach(OneInputVanne => {
+            
+        });
     }
 
     FindVanneName(IdVanne){

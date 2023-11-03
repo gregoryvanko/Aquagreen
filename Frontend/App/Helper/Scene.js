@@ -188,6 +188,7 @@ class Scene {
         return Name
     }
 
+    /** Trouver l'id d'un vanne par rapport à son nom */
     FindVanneId(Name){
         let Id = "not found"
         if (this._Electrovannes != null){

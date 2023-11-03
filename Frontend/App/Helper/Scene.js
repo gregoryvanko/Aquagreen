@@ -201,6 +201,7 @@ class Scene {
         return Id
     }
 
+    /** Generer la liste de toutes les vannes */
     GetListeOfVanne(){
         let liste = []
         if (this._Electrovannes != null){

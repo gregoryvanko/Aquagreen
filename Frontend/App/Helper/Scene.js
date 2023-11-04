@@ -176,6 +176,7 @@ class Scene {
         });
     }
 
+    /** Trouver le nom de la vanne par son ID */
     FindVanneName(IdVanne){
         let Name = "Vanne Name not found"
         if (this._Electrovannes != null){

@@ -33,8 +33,7 @@ docker-compose.yml
 services:
   test:
     container_name: test
-    build:
-      context: ./
+    image : gregoryvanko/aquagreen
     ports:
       - 9999:9999
     networks:

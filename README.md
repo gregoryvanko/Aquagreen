@@ -31,8 +31,8 @@ PORT and MONGOURL are available as env variables.
 docker-compose.yml
 ```
 services:
-  test:
-    container_name: test
+  aquagreen:
+    container_name: aquagreen
     image : gregoryvanko/aquagreen
     ports:
       - 9999:9999

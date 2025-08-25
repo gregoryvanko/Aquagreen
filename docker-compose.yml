@@ -1,0 +1,17 @@
+services:
+  aquagreen:
+    container_name: aquagreen
+    build:
+      context: ./
+    ports:
+      - 9999:9999
+   # volumes:
+   #   - .:/usr/src/app
+   # environment:
+   #   - NODE_ENV=development
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external: true

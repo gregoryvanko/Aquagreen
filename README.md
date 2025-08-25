@@ -26,3 +26,23 @@ require('@gregvanko/aquagreen').Start()
 
 ## Env variable
 PORT and MONGOURL are available as env variables.
+
+## Docker installation
+docker-compose.yml
+```
+services:
+  test:
+    container_name: test
+    build:
+      context: ./
+    ports:
+      - 9999:9999
+    networks:
+      - frontend
+    environment:
+      - MONGOURL=mongodb://mongo:27017
+
+networks:
+  frontend:
+    external: true
+```

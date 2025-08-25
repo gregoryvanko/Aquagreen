@@ -1,0 +1,5 @@
+{
+    "telemetry.editStats.enabled": false,
+    "telemetry.feedback.enabled": false,
+    "rest-client.enableTelemetry": false
+}

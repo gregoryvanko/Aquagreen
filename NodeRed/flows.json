@@ -161,8 +161,8 @@
     {
         "id": "c6bc15b81111a19d",
         "type": "mqtt-broker",
-        "name": "Mosquitto.vanko.be",
-        "broker": "wss://mosquitto.vanko.be:443",
+        "name": "mqtt.vanko.be",
+        "broker": "wss://mqtt.vanko.be:443",
         "port": "1883",
         "tls": "9c7bee9962d8b0d2",
         "clientid": "",

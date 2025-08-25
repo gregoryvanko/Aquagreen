@@ -7,7 +7,7 @@ class DeviceWorker {
         this._LoadStartView = LoadStartView
 
         // https://www.emqx.com/en/blog/mqtt-js-tutorial
-        this._MqttUrl = 'wss://mosquitto.vanko.be:443'
+        this._MqttUrl = 'wss://mqtt.vanko.be:443'
         this._MqttOptions = {
             clean: true,
             connectTimeout: 4000,

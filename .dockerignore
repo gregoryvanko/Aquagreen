@@ -1,0 +1,10 @@
+.vscode
+NodeRed
+jsconfig.json
+.dockerignore
+.gitignore
+.npmignore
+docker-compose.yml
+Dockerfile
+README.md
+.git
